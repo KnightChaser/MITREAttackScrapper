@@ -38,6 +38,8 @@ class MITREAttackEnterpriseTechniques:
         """
         target_url = "https://attack.mitre.org/techniques/enterprise/"
         response = httpx.get(target_url)
+        if response.status_code != 200:
+            raise RuntimeError(f"Failed to fetch data from {target_url}. Status code: {response.status_code}")
         data = []
 
         # Extract the <table> element from the response
@@ -138,8 +140,14 @@ class MITREAttackEnterpriseTechniques:
             ]
         }
         """
+        # Parameter existence check
+        if not parent_technique_id or not child_technique_id:
+            raise ValueError("Parent and child technique IDs are required")
+
         request_url = f"https://attack.mitre.org/techniques/{parent_technique_id}/{child_technique_id}/"
         response: httpx.Response = httpx.get(request_url)
+        if response.status_code != 200:
+            raise RuntimeError(f"Failed to fetch data from {request_url}. Status code: {response.status_code}")
         soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
 
         # Get the data card body
@@ -346,8 +354,14 @@ class MITREAttackEnterpriseTechniques:
             ]
         }
         """
+        # Parameter existence check
+        if not technique_id:
+            raise ValueError("Technique ID is required")
+
         request_url = f"https://attack.mitre.org/techniques/{technique_id}/"
         response: httpx.Response = httpx.get(request_url)
+        if response.status_code != 200:
+            raise RuntimeError(f"Failed to fetch data from {request_url}. Status code: {response.status_code}")
         soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
 
         # Get the data card body
