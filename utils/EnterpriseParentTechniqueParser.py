@@ -30,6 +30,10 @@ def get_enterprise_parent_techniques(technique_id: str) -> Dict[str, Any]:
         "last_modified":        None,
         "mitigations":          [],
         "detection":            [],
+        "description":          {
+            "text": "",
+            "annotations": {}
+        }
     }
 
     def get_text_after_span(card_body: Tag, label: str) -> str:
@@ -124,6 +128,23 @@ def get_enterprise_parent_techniques(technique_id: str) -> Dict[str, Any]:
                     "data_component": data_component,
                     "detects": detects
                 })
+
+    # Parse description
+    description_div: Union[Tag, None] = soup.select_one("#v-attckmatrix > div.row > div > div > div > div:nth-child(2) > div.col-md-8 > div.description-body")
+    if description_div:
+        paragraphs = description_div.find_all("p")
+        description_text = " ".join(p.get_text(" ", strip=True) for p in paragraphs)
+        annotations = {}
+        for ref in description_div.find_all("span", class_="scite-citeref-number"):
+            ref_id = int(ref.get_text(strip=True).strip("[]"))
+            ref_title = ref["title"]
+            ref_href = ref.find("a")["href"]
+            annotations[ref_id] = {
+                "title": ref_title,
+                "href": ref_href
+            }
+        technique_data["description"]["text"] = description_text
+        technique_data["description"]["annotations"] = annotations
 
     return technique_data
 
