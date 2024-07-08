@@ -28,8 +28,8 @@ def get_enterprise_parent_techniques(technique_id: str) -> Dict[str, Any]:
         "version":              "",
         "created":              None,
         "last_modified":        None,
-        "mitigations":          {},
-        "detection":            {},
+        "mitigations":          [],
+        "detection":            [],
     }
 
     def get_text_after_span(card_body: Tag, label: str) -> str:
@@ -89,6 +89,41 @@ def get_enterprise_parent_techniques(technique_id: str) -> Dict[str, Any]:
     last_modified_text: str = get_text_after_span(card_body, "Last Modified:")
     if last_modified_text:
         technique_data["last_modified"] = datetime.strptime(last_modified_text, "%d %B %Y")
+
+    # Parse mitigations
+    mitigation_table: Union[Tag, None] = soup.select_one("#v-attckmatrix > div.row > div > div > div > div:nth-child(4) > table")
+    if mitigation_table:
+        for row in mitigation_table.find("tbody").find_all("tr"):
+            cells = row.find_all("td")
+            mitigation_id = cells[0].get_text(strip=True)
+            mitigation_name = cells[1].get_text(strip=True)
+            mitigation_description = cells[2].get_text(strip=True)
+            technique_data["mitigations"].append({
+                "id": mitigation_id,
+                "name": mitigation_name,
+                "description": mitigation_description
+            })
+
+    # Parse detection
+    detection_table: Union[Tag, None] = soup.select_one("#v-attckmatrix > div.row > div > div > div > div:nth-child(6) > table")
+    latest_detection_id: str = ""   # To handle the case where the detection ID is missing for brief descriptions
+    latest_data_source: str = ""    # To handle the case where the data source is missing for brief descriptions
+    if detection_table:
+        for row in detection_table.find("tbody").find_all("tr"):
+            cells = row.find_all("td")
+            if len(cells) == 4:
+                detection_id = cells[0].get_text(strip=True) or latest_detection_id
+                data_source = cells[1].get_text(strip=True) or latest_data_source
+                latest_detection_id = detection_id
+                latest_data_source = data_source
+                data_component = cells[2].get_text(strip=True)
+                detects = cells[3].get_text(strip=True)
+                technique_data["detection"].append({
+                    "id": detection_id,
+                    "data_source": data_source,
+                    "data_component": data_component,
+                    "detects": detects
+                })
 
     return technique_data
 
