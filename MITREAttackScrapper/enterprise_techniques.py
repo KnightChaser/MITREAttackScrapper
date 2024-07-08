@@ -1,5 +1,6 @@
 # MITREAttackScrapper/enterprise_techniques.py
 import httpx
+import re
 from bs4 import BeautifulSoup, Tag
 from typing import Dict, Any, List, Union
 from datetime import datetime
@@ -82,6 +83,29 @@ class MITREAttackEnterpriseTechniques:
                 })
 
         return data
+    
+    @staticmethod
+    def get(technique_id: str) -> Dict[str, Any]:
+        """
+        Given a technique ID, return the technique information.
+
+        `technique_id` can be either a parent technique ID or a child technique ID. (e.g. `T1548` or `T1548.001`)
+        """
+        if not technique_id:
+            raise ValueError("Technique ID is required")
+        
+        # Regex check for the technique ID
+        if not re.match(r"T\d{4}(\.\d{3})?", technique_id):
+            raise ValueError("Invalid technique ID format. Please provide a valid technique ID.")
+        
+        if "." in technique_id:
+            # Child technique
+            parent_technique_id, child_technique_id = technique_id.split(".")
+            return MITREAttackEnterpriseTechniques.get_child_technique(parent_technique_id=parent_technique_id, 
+                                                                       child_technique_id=child_technique_id)
+        else:
+            # Parent technique
+            return MITREAttackEnterpriseTechniques.get_parent_technique(technique_id=technique_id)
 
     @staticmethod
     def get_child_technique(parent_technique_id: str, child_technique_id: str) -> Dict[str, Any]:

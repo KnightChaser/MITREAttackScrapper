@@ -1,5 +1,7 @@
 __pycache__
 
+test.py
+
 # Ignore the build output
 build
 dist
