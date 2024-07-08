@@ -30,10 +30,8 @@ def get_enterprise_parent_techniques(technique_id: str) -> Dict[str, Any]:
         "last_modified":        None,
         "mitigations":          [],
         "detection":            [],
-        "description":          {
-            "text": "",
-            "annotations": {}
-        }
+        "description":          "",
+        "references":           []
     }
 
     def get_text_after_span(card_body: Tag, label: str) -> str:
@@ -110,16 +108,12 @@ def get_enterprise_parent_techniques(technique_id: str) -> Dict[str, Any]:
 
     # Parse detection
     detection_table: Union[Tag, None] = soup.select_one("#v-attckmatrix > div.row > div > div > div > div:nth-child(6) > table")
-    latest_detection_id: str = ""   # To handle the case where the detection ID is missing for brief descriptions
-    latest_data_source: str = ""    # To handle the case where the data source is missing for brief descriptions
     if detection_table:
         for row in detection_table.find("tbody").find_all("tr"):
             cells = row.find_all("td")
             if len(cells) == 4:
-                detection_id = cells[0].get_text(strip=True) or latest_detection_id
-                data_source = cells[1].get_text(strip=True) or latest_data_source
-                latest_detection_id = detection_id
-                latest_data_source = data_source
+                detection_id = cells[0].get_text(strip=True)
+                data_source = cells[1].get_text(strip=True)
                 data_component = cells[2].get_text(strip=True)
                 detects = cells[3].get_text(strip=True)
                 technique_data["detection"].append({
@@ -134,17 +128,22 @@ def get_enterprise_parent_techniques(technique_id: str) -> Dict[str, Any]:
     if description_div:
         paragraphs = description_div.find_all("p")
         description_text = " ".join(p.get_text(" ", strip=True) for p in paragraphs)
-        annotations = {}
-        for ref in description_div.find_all("span", class_="scite-citeref-number"):
-            ref_id = int(ref.get_text(strip=True).strip("[]"))
-            ref_title = ref["title"]
-            ref_href = ref.find("a")["href"]
-            annotations[ref_id] = {
-                "title": ref_title,
-                "href": ref_href
-            }
-        technique_data["description"]["text"] = description_text
-        technique_data["description"]["annotations"] = annotations
+        technique_data["description"] = description_text
+
+    # Parse references
+    references_div: Union[Tag, None] = soup.select_one("#v-attckmatrix > div.row > div > div > div > div:nth-child(8)")
+    if references_div:
+        references = []
+        for li in references_div.find_all("li"):
+            a_tag = li.find("a")
+            if a_tag:
+                reference_text = li.get_text(" ", strip=True)
+                reference_href = a_tag["href"]
+                references.append({
+                    "text": reference_text,
+                    "href": reference_href
+                })
+        technique_data["references"] = references
 
     return technique_data
 
