@@ -31,10 +31,8 @@ def get_enterprise_child_techniques(technique_parent_id: str, technique_child_id
         "procedures":           [],
         "mitigations":          [],
         "detection":            [],
-        "description":          {
-            "text": "",
-            "annotations": {}
-        }
+        "description":          "",
+        "references":           [],
     }
 
     def get_text_after_span(card_body: Tag, label: str) -> str:
@@ -138,17 +136,22 @@ def get_enterprise_child_techniques(technique_parent_id: str, technique_child_id
     if description_div:
         paragraphs = description_div.find_all("p")
         description_text = " ".join(p.get_text(" ", strip=True) for p in paragraphs)
-        annotations = {}
-        for ref in description_div.find_all("span", class_="scite-citeref-number"):
-            ref_id = ref.get_text(strip=True).strip("[]")
-            ref_title = ref["title"]
-            ref_href = ref.find("a")["href"]
-            annotations[ref_id] = {
-                "title": ref_title,
-                "href": ref_href
-            }
-        technique_data["description"]["text"] = description_text
-        technique_data["description"]["annotations"] = annotations
+        technique_data["description"] = description_text
+
+    # Parse references
+    references_div: Union[Tag, None] = soup.select_one("#v-attckmatrix > div.row > div > div > div > div:nth-child(10)")
+    if references_div:
+        references = []
+        for li in references_div.find_all("li"):
+            a_tag = li.find("a")
+            if a_tag:
+                reference_text = li.get_text(" ", strip=True)
+                reference_href = a_tag["href"]
+                references.append({
+                    "text": reference_text,
+                    "href": reference_href
+                })
+        technique_data["references"] = references
 
     return technique_data
 
