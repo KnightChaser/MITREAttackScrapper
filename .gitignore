@@ -1,1 +1,6 @@
 __pycache__
+
+# Ignore the build output
+build
+dist
+*.egg-info

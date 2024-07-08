@@ -1,4 +1,4 @@
-# utils/enterprise_technique.py
+# MITREAttackScrapper/enterprise_techniques.py
 import httpx
 from bs4 import BeautifulSoup, Tag
 from typing import Dict, Any, List, Union
