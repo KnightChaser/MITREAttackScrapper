@@ -1,18 +1,23 @@
-# MITREAttackScrapper/enterprise_techniques.py
+# MITREAttackScrapper/technique/enterprise.py
 import httpx
 import re
 from bs4 import BeautifulSoup, Tag
 from typing import Dict, Any, List, Union
 from datetime import datetime
+import os
+import sys
+
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+from superclass import MITREAttackInformation
 from utils.scrapping_helper import get_text_after_span, get_links_after_span
 
-class MITREAttackEnterpriseTechniques:
+class MITREAttackEnterpriseTechniques(MITREAttackInformation):
     """
     A class containing methods to parse MITRE ATT&CK Enterprise techniques.
     """
 
     @staticmethod
-    def get_attack_list() -> List[Dict[str, Any]]:
+    def get_list() -> List[Dict[str, Any]]:
         """
         Get the list of all MITRE ATT&CK techniques for Enterprise.
 
