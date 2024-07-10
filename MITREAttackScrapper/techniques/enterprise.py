@@ -164,7 +164,7 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
             "references": [
                 {
                     "text": "Reference Text",
-                    "href": "Reference URL"
+                    "url": "Reference URL"
                 },
                 ...
             ]
@@ -295,10 +295,10 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
                 a_tag = li.find("a")
                 if a_tag:
                     reference_text = li.get_text(" ", strip=True)
-                    reference_href = a_tag["href"]
+                    reference_url = a_tag["href"]
                     references.append({
                         "text": reference_text,
-                        "href": reference_href
+                        "url": reference_url
                     })
             technique_data["references"] = references
 
@@ -355,7 +355,7 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
             "references": [
                 {
                     "text": "Reference Text",
-                    "href": "Reference URL"
+                    "url": "Reference URL"
                 },
                 ...
             ]
@@ -503,10 +503,10 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
                 a_tag = li.find("a")
                 if a_tag:
                     reference_text = li.get_text(" ", strip=True)
-                    reference_href = a_tag["href"]
+                    reference_url = a_tag["href"]
                     references.append({
                         "text": reference_text,
-                        "href": reference_href
+                        "url": reference_url
                     })
             technique_data["references"] = references
 
