@@ -96,6 +96,60 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         Given a technique ID, return the technique information.
 
         `technique_id` can be either a parent technique ID or a child technique ID. (e.g. `T1548` or `T1548.001`)
+        It calls get_parent_technique() if the technique ID is a parent technique ID, or get_child_technique() if the technique ID is a child technique ID.
+
+        No matter the technique ID is a parent or child technique, the returned data structure has the same basic data structure. Here's an example:
+        ```json
+        {
+            "id": "T0001.001",
+            "parent_technique_id": "T0001",
+            "tactics": [
+                {
+                    "name": "Tactic Name",
+                    "url": "https://attack.mitre.org/tactics/Tactic Name/"
+                },
+                ...
+            ],
+            "platforms": ["Platform1", "Platform2", ...],
+            "permission_required": ["Permission1", "Permission2", ...],
+            "version": "Version",
+            "created": "Created Date",
+            "last_modified": "Last Modified Date",
+            "procedures": [
+                {
+                    "id": "Procedure ID",
+                    "name": "Procedure Name",
+                    "description": "Procedure Description"
+                },
+                ...
+            ],
+            "mitigations": [
+                {
+                    "id": "Mitigation ID",
+                    "name": "Mitigation Name",
+                    "description": "Mitigation Description"
+                },
+                ...
+            ],
+            "detection": [
+                {
+                    "id": "Detection ID",
+                    "data_source": "Data Source",
+                    "data_component": "Data Component",
+                    "detects": "Detects"
+                },
+                ...
+            ],
+            "description": "Technique Description",
+            "references": {
+                1 : {
+                    "text": "Reference Text",
+                    "url": "Reference URL"
+                },
+                ...
+            }
+        }
+        ```
         """
         if not technique_id:
             raise ValueError("Technique ID is required")
@@ -117,6 +171,9 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
     def get_child_technique(parent_technique_id: str, child_technique_id: str) -> Dict[str, Any]:
         """
         Parse the specific child Enterprise MITRE ATT&CK Enterprise technique for the given child technique
+
+        This content may have one or multiple references. The references are stored in a dictionary where the key is the reference number.
+        They can be found by number indices such as `[1]`, `[2]`, `[3]`, etc. in the original MITRE ATT&CK page.
 
         The structure of the returned data is as follows:
         ```json
@@ -161,13 +218,13 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
                 ...
             ],
             "description": "Technique Description",
-            "references": [
-                {
+            "references": {
+                1 : {
                     "text": "Reference Text",
                     "url": "Reference URL"
                 },
                 ...
-            ]
+            }
         }
         """
         # Parameter existence check
@@ -289,17 +346,20 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         # Parse references
         # Next object of "h2" tag with "References" inner text
         references_div: Union[Tag, None] = soup.find("h2", string="References").find_next_sibling("div")
+        references_number: int = 1
         if references_div:
-            references = []
+            references = {}
             for li in references_div.find_all("li"):
                 a_tag = li.find("a")
                 if a_tag:
                     reference_text = li.get_text(" ", strip=True)
                     reference_url = a_tag["href"]
-                    references.append({
+                    # Add the reference to the references dictionary; the key is the reference number
+                    references[references_number] = {
                         "text": reference_text,
                         "url": reference_url
-                    })
+                    }
+                    references_number += 1
             technique_data["references"] = references
 
         return technique_data
@@ -308,6 +368,9 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
     def get_parent_technique(technique_id: str) -> Dict[str, Any]:
         """
         Parse the specific child Enterprise MITRE ATT&CK Enterprise technique for the given parent technique
+
+        This content may have one or multiple references. The references are stored in a dictionary where the key is the reference number.
+        They can be found by number indices such as `[1]`, `[2]`, `[3]`, etc. in the original MITRE ATT&CK page.
 
         The structure of the returned data is as follows:
         ```json
@@ -352,13 +415,13 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
                 ...
             ],
             "description": "Technique Description",
-            "references": [
-                {
+            "references": {
+                1 : {
                     "text": "Reference Text",
                     "url": "Reference URL"
                 },
                 ...
-            ]
+            }
         }
         """
         # Parameter existence check
@@ -390,7 +453,7 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
             "mitigations":          [],
             "detection":            [],
             "description":          "",
-            "references":           []
+            "references":           {}
         }
 
         def get_text_after_span(card_body: Tag, label: str) -> str:
@@ -497,17 +560,20 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         # Parse references
         # Next object of "h2" tag with "References" inner text
         references_div: Union[Tag, None] = soup.find("h2", string="References").find_next_sibling("div")
+        reference_number: int = 1
         if references_div:
-            references = []
+            references = {}
             for li in references_div.find_all("li"):
                 a_tag = li.find("a")
                 if a_tag:
                     reference_text = li.get_text(" ", strip=True)
                     reference_url = a_tag["href"]
-                    references.append({
+                    # Add the reference to the references dictionary; the key is the reference number
+                    references[reference_number] = {
                         "text": reference_text,
                         "url": reference_url
-                    })
+                    }
+                    reference_number += 1
             technique_data["references"] = references
 
         return technique_data
