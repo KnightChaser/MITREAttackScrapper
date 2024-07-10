@@ -9,6 +9,7 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from superclass import MITREAttackInformation
 from utils.scrapping_helper import get_text_after_span 
+from utils.mitre_id_validator import validate_mitre_tactic_id
 
 class MITREAttackEnterpriseTactics(MITREAttackInformation):
     """
@@ -59,6 +60,7 @@ class MITREAttackEnterpriseTactics(MITREAttackInformation):
         return data
     
     @staticmethod
+    @validate_mitre_tactic_id
     def get(tactic_id: str) -> Dict[str, Any]:
         """
         Get the details of a specific MITRE ATT&CK tactic for Enterprise

@@ -10,6 +10,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from superclass import MITREAttackInformation
 from utils.scrapping_helper import get_text_after_span, get_links_after_span
+from utils.mitre_id_validator import validate_mitre_technique_id
 
 class MITREAttackEnterpriseTechniques(MITREAttackInformation):
     """
@@ -91,6 +92,7 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         return data
     
     @staticmethod
+    @validate_mitre_technique_id
     def get(technique_id: str) -> Dict[str, Any]:
         """
         Given a technique ID, return the technique information.
@@ -168,6 +170,7 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
             return MITREAttackEnterpriseTechniques.get_parent_technique(technique_id=technique_id)
 
     @staticmethod
+    @validate_mitre_technique_id
     def get_child_technique(parent_technique_id: str, child_technique_id: str) -> Dict[str, Any]:
         """
         Parse the specific child Enterprise MITRE ATT&CK Enterprise technique for the given child technique
@@ -365,6 +368,7 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         return technique_data
 
     @staticmethod
+    @validate_mitre_technique_id
     def get_parent_technique(technique_id: str) -> Dict[str, Any]:
         """
         Parse the specific child Enterprise MITRE ATT&CK Enterprise technique for the given parent technique
