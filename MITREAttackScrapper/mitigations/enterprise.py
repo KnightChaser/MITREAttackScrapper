@@ -101,6 +101,8 @@ class MITREAttackEnterpriseMitigations(MITREAttackInformation):
         target_url = f"https://attack.mitre.org/mitigations/{mitigation_id}/"
         response = httpx.get(target_url)
         if response.status_code != 200:
+            if response.status_code == 404:
+                raise ValueError(f"The mitigation {mitigation_id} does not exist in the MITRE ATT&CK Enterprise mitigations")
             raise RuntimeError(f"Failed to fetch data from {target_url}")
 
         soup = BeautifulSoup(response.text, "html.parser")

@@ -88,6 +88,8 @@ class MITREAttackEnterpriseTactics(MITREAttackInformation):
         target_url = f"https://attack.mitre.org/tactics/{tactic_id}/"
         response = httpx.get(target_url)
         if response.status_code != 200:
+            if response.status_code == 404:
+                raise ValueError(f"The tactic {tactic_id} does not exist in the MITRE ATT&CK Enterprise tactics")
             raise RuntimeError(f"Failed to fetch data from {target_url}")
 
         soup = BeautifulSoup(response.text, "html.parser")

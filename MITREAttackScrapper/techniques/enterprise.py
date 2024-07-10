@@ -237,6 +237,8 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         request_url = f"https://attack.mitre.org/techniques/{parent_technique_id}/{child_technique_id}/"
         response: httpx.Response = httpx.get(request_url)
         if response.status_code != 200:
+            if response.status_code == 404:
+                return ValueError(f"The technique {parent_technique_id}.{child_technique_id} does not exist in the MITRE ATT&CK framework")
             raise RuntimeError(f"Failed to fetch data from {request_url}. Status code: {response.status_code}")
         soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
 
@@ -435,6 +437,8 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         request_url = f"https://attack.mitre.org/techniques/{technique_id}/"
         response: httpx.Response = httpx.get(request_url)
         if response.status_code != 200:
+            if response.status_code == 404:
+                return ValueError(f"The technique {technique_id} does not exist in the MITRE ATT&CK framework")
             raise RuntimeError(f"Failed to fetch data from {request_url}. Status code: {response.status_code}")
         soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
 
