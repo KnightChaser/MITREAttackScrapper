@@ -1,4 +1,4 @@
-# MITREAttackScrapper/enterprise_tactics.py
+# MITREAttackScrapper/tactics/enterprise.py
 import httpx
 from bs4 import BeautifulSoup, Tag
 from typing import List, Dict, Any, Union
@@ -19,19 +19,33 @@ class MITREAttackEnterpriseTactics(MITREAttackInformation):
     @staticmethod
     def get_list() -> List[Dict[str, Any]]:
         """
-        Get the list of all MITRE ATT&CK tactics for Enterprise
+        Get the list of all MITRE ATT&CK tactics for Enterprise.
 
+        Returns
+        -------
+        List[Dict[str, Any]]
+            A list of dictionaries containing tactic information.
+
+        Raises
+        ------
+        RuntimeError
+            If there's a failure in fetching data from the MITRE ATT&CK website.
+
+        Example
+        -------
         The structure of the returned data is as follows:
-        ```json
-        [
-            {
-                "id": "TA0001",
-                "name": "Tactic Name",
-                "description": "Tactic Description",
-                "url": "https://attack.mitre.org/tactics/TA0001/",
-            },
-            ...
-        ]
+        
+        .. code-block:: python
+
+            [
+                {
+                    "id": "TA0001",
+                    "name": "Tactic Name",
+                    "description": "Tactic Description",
+                    "url": "https://attack.mitre.org/tactics/TA0001/",
+                },
+                ...
+            ]
         """
         target_url = "https://attack.mitre.org/tactics/enterprise/"
         response = httpx.get(target_url)
@@ -63,28 +77,48 @@ class MITREAttackEnterpriseTactics(MITREAttackInformation):
     @validate_mitre_tactic_id
     def get(tactic_id: str) -> Dict[str, Any]:
         """
-        Get the details of a specific MITRE ATT&CK tactic for Enterprise
+        Get the details of a specific MITRE ATT&CK tactic for Enterprise.
 
+        Parameters
+        ----------
+        tactic_id : str
+            The ID of the specific MITRE ATT&CK tactic.
+
+        Returns
+        -------
+        Dict[str, Any]
+            A dictionary containing the details of the specified MITRE ATT&CK tactic.
+
+        Raises
+        ------
+        ValueError
+            If the tactic ID does not exist in the MITRE ATT&CK Enterprise tactics.
+        RuntimeError
+            If there's a failure in fetching data from the MITRE ATT&CK website.
+
+        Example
+        -------
         The structure of the returned data is as follows:
-        ```json
-        {
-            "id": "TA0001",
-            "name": "Tactic Name",
-            "created": "Created Date",
-            "last_modified": "Last Modified Date",
-            "url": "https://attack.mitre.org/tactics/TA0001/",
-            "description": "Tactic Description",
-            "techniques": [
-                {
-                    "id": "T1234.001",
-                    "name": "Technique Name",
-                    "url": "https://attack.mitre.org/techniques/T1234/001/",
-                    "description": "Technique Description"
-                }
-            ]
-        }
-        """
+        
+        .. code-block:: json
 
+            {
+                "id": "TA0001",
+                "name": "Tactic Name",
+                "created": "Created Date",
+                "last_modified": "Last Modified Date",
+                "url": "https://attack.mitre.org/tactics/TA0001/",
+                "description": "Tactic Description",
+                "techniques": [
+                    {
+                        "id": "T1234.001",
+                        "name": "Technique Name",
+                        "url": "https://attack.mitre.org/techniques/T1234/001/",
+                        "description": "Technique Description"
+                    }
+                ]
+            }
+        """
         target_url = f"https://attack.mitre.org/tactics/{tactic_id}/"
         response = httpx.get(target_url)
         if response.status_code != 200:

@@ -22,27 +22,40 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         """
         Get the list of all MITRE ATT&CK techniques for Enterprise.
 
+        Returns
+        -------
+        List[Dict[str, Any]]
+            A list of dictionaries containing technique information.
+
+        Raises
+        ------
+        RuntimeError
+            If there's a failure in fetching data from the MITRE ATT&CK website.
+
+        Example
+        -------
         The structure of the returned data is as follows:
-        ```json
-        [
-            {
-                "id": "T0001",
-                "name": "Technique Name",
-                "description": "Technique Description",
-                "url": "https://attack.mitre.org/techniques/T0001/",
-                "sub_techniques": [
-                    {
-                        "id": "T0001.001",
-                        "name": "Sub-Technique Name",
-                        "description": "Sub-Technique Description",
-                        "url": "https://attack.mitre.org/techniques/T0001/T0001.001/"
-                    },
-                    ...
-                ]
-            },
-            ...
-        ]
-        ```
+        
+        .. code-block:: python
+
+            [
+                {
+                    "id": "T0001",
+                    "name": "Technique Name",
+                    "description": "Technique Description",
+                    "url": "https://attack.mitre.org/techniques/T0001/",
+                    "sub_techniques": [
+                        {
+                            "id": "T0001.001",
+                            "name": "Sub-Technique Name",
+                            "description": "Sub-Technique Description",
+                            "url": "https://attack.mitre.org/techniques/T0001/001/"
+                        },
+                        ...
+                    ]
+                },
+                ...
+            ]
         """
         target_url = "https://attack.mitre.org/techniques/enterprise/"
         response = httpx.get(target_url)
@@ -95,63 +108,81 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
     @validate_mitre_technique_id
     def get(technique_id: str) -> Dict[str, Any]:
         """
-        Given a technique ID, return the technique information.
+        Get the details of a specific MITRE ATT&CK technique for Enterprise.
 
-        `technique_id` can be either a parent technique ID or a child technique ID. (e.g. `T1548` or `T1548.001`)
-        It calls get_parent_technique() if the technique ID is a parent technique ID, or get_child_technique() if the technique ID is a child technique ID.
+        Parameters
+        ----------
+        technique_id : str
+            The MITRE ATT&CK technique ID (e.g., T1548 or T1548.001).
 
-        No matter the technique ID is a parent or child technique, the returned data structure has the same basic data structure. Here's an example:
-        ```json
-        {
-            "id": "T0001.001",
-            "parent_technique_id": "T0001",
-            "tactics": [
-                {
-                    "name": "Tactic Name",
-                    "url": "https://attack.mitre.org/tactics/Tactic Name/"
-                },
-                ...
-            ],
-            "platforms": ["Platform1", "Platform2", ...],
-            "permission_required": ["Permission1", "Permission2", ...],
-            "version": "Version",
-            "created": "Created Date",
-            "last_modified": "Last Modified Date",
-            "procedures": [
-                {
-                    "id": "Procedure ID",
-                    "name": "Procedure Name",
-                    "description": "Procedure Description"
-                },
-                ...
-            ],
-            "mitigations": [
-                {
-                    "id": "Mitigation ID",
-                    "name": "Mitigation Name",
-                    "description": "Mitigation Description"
-                },
-                ...
-            ],
-            "detection": [
-                {
-                    "id": "Detection ID",
-                    "data_source": "Data Source",
-                    "data_component": "Data Component",
-                    "detects": "Detects"
-                },
-                ...
-            ],
-            "description": "Technique Description",
-            "references": {
-                1 : {
-                    "text": "Reference Text",
-                    "url": "Reference URL"
-                },
-                ...
+        Returns
+        -------
+        Dict[str, Any]
+            A dictionary containing technique information.
+
+        Raises
+        ------
+        ValueError
+            If the technique ID is invalid or does not exist in the MITRE ATT&CK framework.
+        RuntimeError
+            If there's a failure in fetching data from the MITRE ATT&CK website.
+
+        Example
+        -------
+        The structure of the returned data is as follows:
+        
+        .. code-block:: python
+
+            {
+                "id": "T0001.001",
+                "parent_technique_id": "T0001",
+                "tactics": [
+                    {
+                        "name": "Tactic Name",
+                        "url": "https://attack.mitre.org/tactics/Tactic Name/"
+                    },
+                    ...
+                ],
+                "platforms": ["Platform1", "Platform2", ...],
+                "permission_required": ["Permission1", "Permission2", ...],
+                "version": "Version",
+                "created": "Created Date",
+                "last_modified": "Last Modified Date",
+                "procedures": [
+                    {
+                        "id": "Procedure ID",
+                        "name": "Procedure Name",
+                        "description": "Procedure Description"
+                    },
+                    ...
+                ],
+                "mitigations": [
+                    {
+                        "id": "Mitigation ID",
+                        "name": "Mitigation Name",
+                        "description": "Mitigation Description"
+                    },
+                    ...
+                ],
+                "detection": [
+                    {
+                        "id": "Detection ID",
+                        "data_source": "Data Source",
+                        "data_component": "Data Component",
+                        "detects": "Detects"
+                    },
+                    ...
+                ],
+                "description": "Technique Description",
+                "references": {
+                    1 : {
+                        "text": "Reference Text",
+                        "url": "Reference URL"
+                    },
+                    ...
+                }
             }
-        }
-        ```
+
         """
         if not technique_id:
             raise ValueError("Technique ID is required")
@@ -173,62 +204,85 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
     @validate_mitre_technique_id
     def get_child_technique(parent_technique_id: str, child_technique_id: str) -> Dict[str, Any]:
         """
-        Parse the specific child Enterprise MITRE ATT&CK Enterprise technique for the given child technique
+        Given a parent and child technique ID, return the child technique information.
 
-        This content may have one or multiple references. The references are stored in a dictionary where the key is the reference number.
-        They can be found by number indices such as `[1]`, `[2]`, `[3]`, etc. in the original MITRE ATT&CK page.
+        parameters
+        ----------
+        parent_technique_id : str
+            The parent MITRE ATT&CK technique ID (e.g., T1548).
+        
+        child_technique_id : str
+            The child MITRE ATT&CK technique ID (e.g., T1548.001).
 
+        returns
+        -------
+        Dict[str, Any]
+            A dictionary containing the child technique information.
+
+        raises
+        ------
+        ValueError
+            If the parent and child technique IDs are invalid or do not exist in the MITRE ATT&CK framework.
+
+        RuntimeError
+            If there's a failure in fetching data from the MITRE ATT&CK website.
+
+        Example
+        -------
         The structure of the returned data is as follows:
-        ```json
-        {
-            "id": "T0001.001",
-            "parent_technique_id": "T0001",
-            "tactics": [
-                {
-                    "name": "Tactic Name",
-                    "url": "https://attack.mitre.org/tactics/Tactic Name/"
-                },
-                ...
-            ],
-            "platforms": ["Platform1", "Platform2", ...],
-            "permission_required": ["Permission1", "Permission2", ...],
-            "version": "Version",
-            "created": "Created Date",
-            "last_modified": "Last Modified Date",
-            "procedures": [
-                {
-                    "id": "Procedure ID",
-                    "name": "Procedure Name",
-                    "description": "Procedure Description"
-                },
-                ...
-            ],
-            "mitigations": [
-                {
-                    "id": "Mitigation ID",
-                    "name": "Mitigation Name",
-                    "description": "Mitigation Description"
-                },
-                ...
-            ],
-            "detection": [
-                {
-                    "id": "Detection ID",
-                    "data_source": "Data Source",
-                    "data_component": "Data Component",
-                    "detects": "Detects"
-                },
-                ...
-            ],
-            "description": "Technique Description",
-            "references": {
-                1 : {
-                    "text": "Reference Text",
-                    "url": "Reference URL"
-                },
-                ...
+
+        .. code-block:: python
+
+            {
+                "id": "T0001.001",
+                "parent_technique_id": "T0001",
+                "tactics": [
+                    {
+                        "name": "Tactic Name",
+                        "url": "https://attack.mitre.org/tactics/Tactic Name/"
+                    },
+                    ...
+                ],
+                "platforms": ["Platform1", "Platform2", ...],
+                "permission_required": ["Permission1", "Permission2", ...],
+                "version": "Version",
+                "created": "Created Date",
+                "last_modified": "Last Modified Date",
+                "procedures": [
+                    {
+                        "id": "Procedure ID",
+                        "name": "Procedure Name",
+                        "description": "Procedure Description"
+                    },
+                    ...
+                ],
+                "mitigations": [
+                    {
+                        "id": "Mitigation ID",
+                        "name": "Mitigation Name",
+                        "description": "Mitigation Description"
+                    },
+                    ...
+                ],
+                "detection": [
+                    {
+                        "id": "Detection ID",
+                        "data_source": "Data Source",
+                        "data_component": "Data Component",
+                        "detects": "Detects"
+                    },
+                    ...
+                ],
+                "description": "Technique Description",
+                "references": {
+                    1 : {
+                        "text": "Reference Text",
+                        "url": "Reference URL"
+                    },
+                    ...
+                }
             }
-        }
+        
         """
         # Parameter existence check
         if not parent_technique_id or not child_technique_id:
@@ -373,64 +427,84 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
     @validate_mitre_technique_id
     def get_parent_technique(technique_id: str) -> Dict[str, Any]:
         """
-        Parse the specific child Enterprise MITRE ATT&CK Enterprise technique for the given parent technique
+        Given a parent technique ID, return the parent technique information.
 
-        This content may have one or multiple references. The references are stored in a dictionary where the key is the reference number.
-        They can be found by number indices such as `[1]`, `[2]`, `[3]`, etc. in the original MITRE ATT&CK page.
+        parameters
+        ----------
+        technique_id : str
+            The parent MITRE ATT&CK technique ID (e.g., T1548).
 
+        returns
+        -------
+        Dict[str, Any]
+            A dictionary containing the parent technique information.
+
+        raises
+        ------
+        ValueError
+            If the parent technique ID is invalid or does not exist in the MITRE ATT&CK framework.
+        
+        RuntimeError
+            If there's a failure in fetching data from the MITRE ATT&CK website.
+
+        Example
+        -------
         The structure of the returned data is as follows:
-        ```json
-        {
-            "id": "T0001",
-            "sub_techniques": [
-                {
-                    "id": "T0001.001",
-                    "name": "Sub-Technique Name",
-                    "description": "Sub-Technique Description",
-                    "url": "https://attack.mitre.org/techniques/T0001/T0001.001/"
+
+        .. code-block:: python
+        
+            {
+                "id": "T0001",
+                "tactics": [
+                    {
+                        "name": "Tactic Name",
+                        "url": "https://attack.mitre.org/tactics/Tactic Name/"
+                    },
+                    ...
+                ],
+                "platforms": ["Platform1", "Platform2", ...],
+                "permission_required": ["Permission1", "Permission2", ...],
+                "version": "Version",
+                "created": "Created Date",
+                "last_modified": "Last Modified Date",
+                "sub_techniques": [
+                    {
+                        "id": "T0001.001",
+                        "name": "Sub-Technique Name",
+                        "url": "https://attack.mitre.org/techniques/T0001/001/",
+                        "description": "Sub-Technique Description"
+                    },
+                    ...
+                ],
+                "mitigations": [
+                    {
+                        "id": "Mitigation ID",
+                        "name": "Mitigation Name",
+                        "description": "Mitigation Description"
+                    },
+                    ...
+                ],
+                "detection": [
+                    {
+                        "id": "Detection ID",
+                        "data_source": "Data Source",
+                        "data_component": "Data Component",
+                        "detects": "Detects"
+                    },
+                    ...
+                ],
+                "description": "Technique Description",
+                "references": {
+                    1 : {
+                        "text": "Reference Text",
+                        "url": "Reference URL"
+                    },
+                    ...
                 },
-                ...
-            ],
-            "tactics": [
-                {
-                    "name": "Tactic Name",
-                    "url": "https://attack.mitre.org/tactics/Tactic Name/"
-                },
-                ...
-            ],
-            "platforms": ["Platform1", "Platform2", ...],
-            "permission_required": ["Permission1", "Permission2", ...],
-            "version": "Version",
-            "created": "Created Date",
-            "last_modified": "Last Modified Date",
-            "mitigations": [
-                {
-                    "id": "Mitigation ID",
-                    "name": "Mitigation Name",
-                    "description": "Mitigation Description"
-                },
-                ...
-            ],
-            "detection": [
-                {
-                    "id": "Detection ID",
-                    "data_source": "Data Source",
-                    "data_component": "Data Component",
-                    "detects": "Detects"
-                },
-                ...
-            ],
-            "description": "Technique Description",
-            "references": {
-                1 : {
-                    "text": "Reference Text",
-                    "url": "Reference URL"
-                },
-                ...
             }
-        }
+
         """
-        # Parameter existence check
+        # parameter existence check
         if not technique_id:
             raise ValueError("Technique ID is required")
 

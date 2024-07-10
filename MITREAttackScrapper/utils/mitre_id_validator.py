@@ -5,18 +5,29 @@ from typing import Callable
 
 def validate_mitre_technique_id(function: Callable) -> Callable:
     """
-    A wrapper function to validate the MITRE ATT&CK technique ID.
-    It generally follows the format as the following:
-    ```text
-          "."(dot) if it is a sub-technique
-          |
-          |  3 digits of sub-technique ID
-          |  |
-    TXXXX[.YYY]
-    |   |
-    |   4 digits of main technique ID
-    |
-    "T" prefix meaning "Technique"
+    A wrapper function to validate the MITRE ATT&CK technique ID. 
+    
+    The format of the MITRE ATT&CK technique ID is the following:
+
+    .. code-block:: text
+
+        TXXXX[.YYY]
+        ||     |
+        ||     +-> Optional sub-technique ID (2 digits)
+        ||
+        |+-> Technique ID (4 digits)
+        |
+        +-> Prefix "T' meaning "Technique"
+        
+    parameters
+    ----------
+    function : Callable
+        The function to be wrapped.
+
+    returns
+    -------
+    Callable
+        The wrapped function that requires the MITRE ATT&CK technique ID with valid format
     """
     @wraps(function)
     def wrapper(*args, **kwargs):
@@ -38,13 +49,26 @@ def validate_mitre_technique_id(function: Callable) -> Callable:
 def validate_mitre_tactic_id(function: Callable) -> Callable:
     """
     A wrapper function to validate the MITRE ATT&CK tactic ID.
-    It generally follows the format as the following:
-    ```text
-    TAXXXX
-    | |
-    | 4 digits of tactic ID
-    |
-    "TA" prefix meaning "Tactic"
+
+    The format of the MITRE ATT&CK tactic ID is the following:
+
+    .. code-block:: text
+
+        TAXXXX
+        | |
+        | +-> Tactic ID (4 digits)
+        |
+        +-> Prefix "TA" meaning "Tactic"
+    
+    parameters
+    ----------
+    function : Callable
+        The function to be wrapped.
+
+    returns
+    -------
+    Callable
+        The wrapped function that requires the MITRE ATT&CK tactic ID with valid format
     """
     @wraps(function)
     def wrapper(*args, **kwargs):
@@ -66,13 +90,26 @@ def validate_mitre_tactic_id(function: Callable) -> Callable:
 def validate_mitre_mitigation_id(function: Callable) -> Callable:
     """
     A wrapper function to validate the MITRE ATT&CK mitigation ID.
-    It generally follows the format as the following:
-    ```text
-    MXXXX
-    ||
-    |4 digits of mitigation ID
-    |
-    "M" prefix meaning "Mitigation"
+
+    The format of the MITRE ATT&CK mitigation ID is the following:
+
+    .. code-block:: text
+
+        MXXXX
+        ||
+        |+-> Mitigation ID (4 digits)
+        |
+        +-> Prefix "M" meaning "Mitigation"
+
+    parameters
+    ----------
+    function : Callable
+        The function to be wrapped.
+
+    returns
+    -------
+    Callable
+        The wrapped function that requires the MITRE ATT&CK mitigation ID with valid format
     """
     @wraps(function)
     def wrapper(*args, **kwargs):

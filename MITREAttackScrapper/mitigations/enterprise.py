@@ -1,4 +1,23 @@
 # MITREAttackScrapper/mitigations/enterprise.py
+"""
+MITRE ATT&CK Enterprise Mitigations
+===================================
+
+This module contains methods to parse MITRE ATT&CK Enterprise Mitigations.
+
+Classes:
+--------
+MITREAttackEnterpriseMitigations : Parses MITRE ATT&CK Enterprise Mitigations.
+
+Methods:
+--------
+get_list() -> List[Dict[str, Any]] :
+    Get the list of all MITRE ATT&CK mitigations for Enterprise.
+
+get(mitigation_id: str) -> Dict[str, Any] :
+    Get the details of a specific MITRE ATT&CK mitigation for Enterprise.
+"""
+
 import httpx
 from bs4 import BeautifulSoup, Tag
 from typing import List, Dict, Any, Union
@@ -19,19 +38,28 @@ class MITREAttackEnterpriseMitigations(MITREAttackInformation):
     @staticmethod
     def get_list() -> List[Dict[str, Any]]:
         """
-        Get the list of all MITRE ATT&CK mitigations for Enterprise
+        Get the list of all MITRE ATT&CK mitigations for Enterprise.
 
+        Returns
+        -------
+        List[Dict[str, Any]]
+            A list of dictionaries containing MITRE ATT&CK mitigations data.
+
+        Example
+        -------
         The structure of the returned data is as follows:
-        ```json
-        [
-            {
-                "id": "M0001",
-                "name": "Mitigation Name",
-                "description": "Mitigation Description",
-                "url": "https://attack.mitre.org/mitigations/M0001/",
-            },
-            ...
-        ]
+
+        .. code-block:: python
+
+            [
+                {
+                    "id": "M1234",
+                    "name": "Mitigation Name",
+                    "description": "Mitigation Description",
+                    "url": "https://attack.mitre.org/mitigations/M1234/"
+                },
+                ...
+            ]
         """
         target_url = "https://attack.mitre.org/mitigations/enterprise/"
         response = httpx.get(target_url)
@@ -65,38 +93,58 @@ class MITREAttackEnterpriseMitigations(MITREAttackInformation):
         """
         Get the details of a specific MITRE ATT&CK mitigation for Enterprise.
 
+        Parameters
+        ----------
+        mitigation_id : str
+            The ID of the specific MITRE ATT&CK mitigation.
+
+        Returns
+        -------
+        Dict[str, Any]
+            A dictionary containing the details of the specified MITRE ATT&CK mitigation.
+
+        Raises
+        ------
+        ValueError
+            If the mitigation ID does not exist in the MITRE ATT&CK Enterprise mitigations.
+        RuntimeError
+            If there's a failure in fetching data from the MITRE ATT&CK website.
+
         
-        This content may have one or multiple references. The references are stored in a dictionary where the key is the reference number.
-        They can be found by number indices such as `[1]`, `[2]`, `[3]`, etc. in the original MITRE ATT&CK page.
-        
+        Example
+        -------
         The structure of the returned data is as follows:
-        ```json
-        {
-            "id": "M0001",
-            "name": "Mitigation Name",
-            "version": "Mitigation Version",
-            "created": "Created Date",
-            "last_modified": "Last Modified Date",
-            "url": "https://attack.mitre.org/mitigations/M0001/",
-            "description": "Mitigation Description",
-            "techniques_addressed_by_mitigation": [
-                {
-                    "domain": "Enterprise",
-                    "id": "T0001.001",
-                    "name": "Technique Name",
-                    "use": "Use of Technique",
-                    "url": "https://attack.mitre.org/techniques/T0001/"
-                },
-                ...
-            ],
-            "references": {
-                1 : {
-                    "text": "Reference Text",
-                    "url": "Reference URL"
-                },
-                ...
+        
+        .. code-block:: json
+
+            {
+                "id": "M1234",
+                "name": "Mitigation Name",
+                "version": "1.0",
+                "created": "2021-01-01",
+                "last_modified": "2021-01-01",
+                "url": "https://attack.mitre.org/mitigations/M1234/",
+                "description": "Mitigation Description",
+                "techniques_addressed_by_mitigation": [
+                    {
+                        "domain": "Enterprise",
+                        "id": "T1234",
+                        "name": "Technique Name",
+                        "use": "Technique Use",
+                        "url": "https://attack.mitre.org/techniques/T1234/"
+                    }
+                ],
+                "references": {
+                    1: {
+                        "text": "Reference 1",
+                        "url": "https://example1.com"
+                    },
+                    2: {
+                        "text": "Reference 2",
+                        "url": "https://example2.com"
+                    }
+                }
             }
-        }
         """
         target_url = f"https://attack.mitre.org/mitigations/{mitigation_id}/"
         response = httpx.get(target_url)
@@ -178,7 +226,7 @@ class MITREAttackEnterpriseMitigations(MITREAttackInformation):
                         "url": technique_url
                     })
 
-        # Parse references
+        # Parse referencescgh
         references_div: Union[Tag, None] = soup.find("h2", string="References").find_next("div")
         reference_number: int = 1
         if references_div:
