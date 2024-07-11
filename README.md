@@ -2,7 +2,22 @@
 ### A simple and easy data scrapper for **MITRE ATT&CK** information for threat intelligence and knowledge bases, written in Python3.
 > Un scrapper de datos simple y fácil para la información de **MITRE ATT&CK** para inteligencia de amenazas y bases de conocimiento, escrito en Python3.
 
-### Note: Currently under development
+```py
+# Need to MITRE ATT&CK data? How about using my package?
+from MITREAttackScrapper.techniques.enterprise import MITREAttackEnterpriseTechniques
+
+if __name__ == '__main__':
+    detail = MITREAttackEnterpriseTechniques.get("T1548")
+    print(f"Technique: {detail['name']}")
+    print(f"Platforms affected by this technique: {detail['platforms']}")
+    print(f"Number of sub-techniques: {len(detail['sub_techniques'])}")
+
+    # Technique: Abuse Elevation Control Mechanism
+    # Platforms affected by this technique: ['Azure AD', 'Google Workspace', 'IaaS', 'Linux', 'Office 365', 'Windows', 'macOS']
+    # Number of sub-techniques: 6
+```
+
+### Note: Currently under development, not stable!!!
 
 ## How to use?
 Refer to the **[documentation](https://knightchaser.github.io/MITREAttackScrapper/)**! >_<
