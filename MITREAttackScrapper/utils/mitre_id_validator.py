@@ -151,3 +151,40 @@ def validate_mitre_group_id(function: Callable) -> Callable:
         return function(*args, **kwargs)
     
     return wrapper
+
+def validate_mitre_software_id(function: Callable) -> Callable:
+    """
+    A wrapper function to validate the MITRE ATT&CK software ID.
+
+    The format of the MITRE ATT&CK software ID is as follows:
+
+    .. code-block:: text
+
+        SXXXX
+        ||
+        |+-> Software ID (4 digits)
+        |
+        +-> Prefix "S" meaning "Software"
+
+    :param function: The function to be wrapped.
+    :type function: Callable
+    :return: The wrapped function that requires the MITRE ATT&CK software ID with valid format.
+    :rtype: Callable
+    :raises ValueError: If the MITRE ATT&CK software ID is not in the valid format.
+    """
+    @wraps(function)
+    def wrapper(*args, **kwargs):
+        pattern = r"^S\d{4}$"
+        # Iterate through all arguments and keyword arguments
+        for arg in args:
+            if isinstance(arg, str) and not re.match(pattern, arg):
+                raise ValueError("Invalid MITRE ATT&CK software ID, should be in the format of SXXXX")
+        
+        for key, value in kwargs.items():
+            if isinstance(key, str) and key.endswith("software_id"):
+                if not re.match(pattern, value):
+                    raise ValueError("Invalid MITRE ATT&CK software ID, should be in the format of SXXXX")
+        
+        return function(*args, **kwargs)
+    
+    return wrapper
