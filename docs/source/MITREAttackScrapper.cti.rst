@@ -12,6 +12,14 @@ MITREAttackScrapper.cti.groups module
    :undoc-members:
    :show-inheritance:
 
+MITREAttackScrapper.cti.software module
+---------------------------------------
+
+.. automodule:: MITREAttackScrapper.cti.software
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 

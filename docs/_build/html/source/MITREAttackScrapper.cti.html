@@ -314,13 +314,14 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-MITREAttackScrapper.cti.groups">MITREAttackScrapper.cti.groups module</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.cti.groups.MITREAttackGroups"><code class="docutils literal notranslate"><span class="pre">MITREAttackGroups</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.cti.groups.MITREAttackGroups.get"><code class="docutils literal notranslate"><span class="pre">MITREAttackGroups.get()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.cti.groups.MITREAttackGroups.get_list"><code class="docutils literal notranslate"><span class="pre">MITREAttackGroups.get_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.cti.groups.MITREAttackCTIGroups"><code class="docutils literal notranslate"><span class="pre">MITREAttackCTIGroups</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.cti.groups.MITREAttackCTIGroups.get"><code class="docutils literal notranslate"><span class="pre">MITREAttackCTIGroups.get()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.cti.groups.MITREAttackCTIGroups.get_list"><code class="docutils literal notranslate"><span class="pre">MITREAttackCTIGroups.get_list()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-MITREAttackScrapper.cti.software">MITREAttackScrapper.cti.software module</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-MITREAttackScrapper.cti">Module contents</a></li>
 </ul>
             </nav>
@@ -341,13 +342,13 @@ document.write(`
 <section id="module-MITREAttackScrapper.cti.groups">
 <span id="mitreattackscrapper-cti-groups-module"></span><h2>MITREAttackScrapper.cti.groups module<a class="headerlink" href="#module-MITREAttackScrapper.cti.groups" title="Link to this heading">#</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="MITREAttackScrapper.cti.groups.MITREAttackGroups">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MITREAttackScrapper.cti.groups.</span></span><span class="sig-name descname"><span class="pre">MITREAttackGroups</span></span><a class="headerlink" href="#MITREAttackScrapper.cti.groups.MITREAttackGroups" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="MITREAttackScrapper.cti.groups.MITREAttackCTIGroups">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MITREAttackScrapper.cti.groups.</span></span><span class="sig-name descname"><span class="pre">MITREAttackCTIGroups</span></span><a class="headerlink" href="#MITREAttackScrapper.cti.groups.MITREAttackCTIGroups" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MITREAttackInformation</span></code></p>
 <p>A class containing methods to parse MITRE ATT&amp;CK Groups.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="MITREAttackScrapper.cti.groups.MITREAttackGroups.get">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#MITREAttackScrapper.cti.groups.MITREAttackGroups.get" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="MITREAttackScrapper.cti.groups.MITREAttackCTIGroups.get">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#MITREAttackScrapper.cti.groups.MITREAttackCTIGroups.get" title="Link to this definition">#</a></dt>
 <dd><p>Get the details of a specific MITRE ATT&amp;CK Group.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -427,8 +428,8 @@ document.write(`
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="MITREAttackScrapper.cti.groups.MITREAttackGroups.get_list">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#MITREAttackScrapper.cti.groups.MITREAttackGroups.get_list" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="MITREAttackScrapper.cti.groups.MITREAttackCTIGroups.get_list">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#MITREAttackScrapper.cti.groups.MITREAttackCTIGroups.get_list" title="Link to this definition">#</a></dt>
 <dd><p>Get the list of all MITRE ATT&amp;CK Groups.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -459,6 +460,9 @@ document.write(`
 
 </dd></dl>
 
+</section>
+<section id="module-MITREAttackScrapper.cti.software">
+<span id="mitreattackscrapper-cti-software-module"></span><h2>MITREAttackScrapper.cti.software module<a class="headerlink" href="#module-MITREAttackScrapper.cti.software" title="Link to this heading">#</a></h2>
 </section>
 <section id="module-MITREAttackScrapper.cti">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-MITREAttackScrapper.cti" title="Link to this heading">#</a></h2>
@@ -512,13 +516,14 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-MITREAttackScrapper.cti.groups">MITREAttackScrapper.cti.groups module</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.cti.groups.MITREAttackGroups"><code class="docutils literal notranslate"><span class="pre">MITREAttackGroups</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.cti.groups.MITREAttackGroups.get"><code class="docutils literal notranslate"><span class="pre">MITREAttackGroups.get()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.cti.groups.MITREAttackGroups.get_list"><code class="docutils literal notranslate"><span class="pre">MITREAttackGroups.get_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.cti.groups.MITREAttackCTIGroups"><code class="docutils literal notranslate"><span class="pre">MITREAttackCTIGroups</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.cti.groups.MITREAttackCTIGroups.get"><code class="docutils literal notranslate"><span class="pre">MITREAttackCTIGroups.get()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.cti.groups.MITREAttackCTIGroups.get_list"><code class="docutils literal notranslate"><span class="pre">MITREAttackCTIGroups.get_list()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-MITREAttackScrapper.cti.software">MITREAttackScrapper.cti.software module</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-MITREAttackScrapper.cti">Module contents</a></li>
 </ul>
   </nav></div>

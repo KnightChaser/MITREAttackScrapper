@@ -3,7 +3,6 @@
 import httpx
 from bs4 import BeautifulSoup, Tag
 from typing import List, Dict, Any, Union
-from datetime import datetime
 import sys
 import os
 
@@ -12,7 +11,7 @@ from superclass import MITREAttackInformation
 from utils.mitre_id_validator import validate_mitre_group_id
 from utils.scrapping_helper import get_text_after_span
 
-class MITREAttackGroups(MITREAttackInformation):
+class MITREAttackCTIGroups(MITREAttackInformation):
     """
     A class containing methods to parse MITRE ATT&CK Groups.
     """
