@@ -1,4 +1,5 @@
 # MITREAttackScrapper/tactics/enterprise.py
+
 import httpx
 from bs4 import BeautifulSoup, Tag
 from typing import List, Dict, Any, Union
@@ -12,29 +13,19 @@ from utils.scrapping_helper import get_text_after_span
 from utils.mitre_id_validator import validate_mitre_tactic_id
 
 class MITREAttackEnterpriseTactics(MITREAttackInformation):
-    """
-    A class containing methods to parse MITRE ATT&CK Enterprise Tactics.
-    """
+    """A class containing methods to parse MITRE ATT&CK Enterprise Tactics."""
 
     @staticmethod
     def get_list() -> List[Dict[str, Any]]:
         """
         Get the list of all MITRE ATT&CK tactics for Enterprise.
 
-        Returns
-        -------
-        List[Dict[str, Any]]
-            A list of dictionaries containing tactic information.
+        :return: A list of dictionaries containing tactic information.
+        :rtype: List[Dict[str, Any]]
+        :raises RuntimeError: If there's a failure in fetching data from the MITRE ATT&CK website.
 
-        Raises
-        ------
-        RuntimeError
-            If there's a failure in fetching data from the MITRE ATT&CK website.
+        :Example:
 
-        Example
-        -------
-        The structure of the returned data is as follows:
-        
         .. code-block:: python
 
             [
@@ -44,7 +35,7 @@ class MITREAttackEnterpriseTactics(MITREAttackInformation):
                     "description": "Tactic Description",
                     "url": "https://attack.mitre.org/tactics/TA0001/",
                 },
-                ...
+                # ... more tactic entries
             ]
         """
         target_url = "https://attack.mitre.org/tactics/enterprise/"
@@ -79,28 +70,16 @@ class MITREAttackEnterpriseTactics(MITREAttackInformation):
         """
         Get the details of a specific MITRE ATT&CK tactic for Enterprise.
 
-        Parameters
-        ----------
-        tactic_id : str
-            The ID of the specific MITRE ATT&CK tactic.
+        :param tactic_id: The ID of the specific MITRE ATT&CK tactic.
+        :type tactic_id: str
+        :return: A dictionary containing the details of the specified MITRE ATT&CK tactic.
+        :rtype: Dict[str, Any]
+        :raises ValueError: If the tactic ID does not exist in the MITRE ATT&CK Enterprise tactics.
+        :raises RuntimeError: If there's a failure in fetching data from the MITRE ATT&CK website.
 
-        Returns
-        -------
-        Dict[str, Any]
-            A dictionary containing the details of the specified MITRE ATT&CK tactic.
+        :Example:
 
-        Raises
-        ------
-        ValueError
-            If the tactic ID does not exist in the MITRE ATT&CK Enterprise tactics.
-        RuntimeError
-            If there's a failure in fetching data from the MITRE ATT&CK website.
-
-        Example
-        -------
-        The structure of the returned data is as follows:
-        
-        .. code-block:: json
+        .. code-block:: python
 
             {
                 "id": "TA0001",
@@ -157,38 +136,38 @@ class MITREAttackEnterpriseTactics(MITREAttackInformation):
             last_modified_text = get_text_after_span(card_body, "Last Modified:")
 
             if created_text:
-                tactic_data["created"] = datetime.strptime(created_text, "%d %B %Y")
+                tactic_data["created"] = datetime.strptime(created_text, "%d %B %Y").strftime("%Y-%m-%d")
             if last_modified_text:
-                tactic_data["last_modified"] = datetime.strptime(last_modified_text, "%d %B %Y")
+                tactic_data["last_modified"] = datetime.strptime(last_modified_text, "%d %B %Y").strftime("%Y-%m-%d")
 
         # Parse techniques
         techniques_table: Union[Tag, None] = soup.find("h2", string="Techniques").find_next("table")
         if techniques_table:
-            latest_parent_technique_id = None
+            latest_main_technique_id = None
             for row in techniques_table.find("tbody").find_all("tr"):
                 cells = row.find_all("td")
                 if "technique" == row["class"][0]:
-                    # parsing (parent) technique
-                    technique_id:str = cells[0].find("a").text.strip()
-                    latest_parent_technique_id = technique_id
-                    technique_name:str = cells[1].find("a").text.strip()
+                    # parsing main technique
+                    main_technique_id: str = cells[0].find("a").text.strip()
+                    latest_main_technique_id = main_technique_id
+                    technique_name: str = cells[1].find("a").text.strip()
                     technique_url = f"https://attack.mitre.org{cells[1].find('a')['href']}"
                     technique_description = cells[2].get_text(strip=True)
                     tactic_data["techniques"].append({
-                        "id": technique_id,
+                        "id": main_technique_id,
                         "name": technique_name,
                         "url": technique_url,
                         "description": technique_description
                     })
 
                 elif "sub" == row["class"][0] and "technique" in row["class"]:
-                    # parsing (child) sub-technique
-                    technique_id:str = f"{latest_parent_technique_id}{cells[1].find('a').text.strip()}"
-                    technique_name:str = cells[2].find("a").text.strip()
+                    # parsing sub-technique
+                    sub_technique_id: str = f"{latest_main_technique_id}{cells[1].find('a').text.strip()}"
+                    technique_name: str = cells[2].find("a").text.strip()
                     technique_url = f"https://attack.mitre.org{cells[2].find('a')['href']}"
                     technique_description = cells[3].get_text(strip=True)
                     tactic_data["techniques"].append({
-                        "id": technique_id,
+                        "id": sub_technique_id,
                         "name": technique_name,
                         "url": technique_url,
                         "description": technique_description
