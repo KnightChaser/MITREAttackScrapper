@@ -1,33 +1,28 @@
-# MITREAttackScrapper/utils/mitre_id_validator.py
 import re
 from functools import wraps
 from typing import Callable
 
 def validate_mitre_technique_id(function: Callable) -> Callable:
     """
-    A wrapper function to validate the MITRE ATT&CK technique ID. 
+    A wrapper function to validate the MITRE ATT&CK technique ID.
     
-    The format of the MITRE ATT&CK technique ID is the following:
+    The format of the MITRE ATT&CK technique ID is as follows:
 
     .. code-block:: text
 
         TXXXX[.YYY]
         ||     |
-        ||     +-> Optional sub-technique ID (2 digits)
+        ||     +-> Optional sub-technique ID (3 digits)
         ||
         |+-> Technique ID (4 digits)
         |
-        +-> Prefix "T' meaning "Technique"
+        +-> Prefix "T" meaning "Technique"
         
-    parameters
-    ----------
-    function : Callable
-        The function to be wrapped.
-
-    returns
-    -------
-    Callable
-        The wrapped function that requires the MITRE ATT&CK technique ID with valid format
+    :param function: The function to be wrapped.
+    :type function: Callable
+    :return: The wrapped function that requires the MITRE ATT&CK technique ID with valid format.
+    :rtype: Callable
+    :raises ValueError: If the MITRE ATT&CK technique ID is not in the valid format.
     """
     @wraps(function)
     def wrapper(*args, **kwargs):
@@ -50,7 +45,7 @@ def validate_mitre_tactic_id(function: Callable) -> Callable:
     """
     A wrapper function to validate the MITRE ATT&CK tactic ID.
 
-    The format of the MITRE ATT&CK tactic ID is the following:
+    The format of the MITRE ATT&CK tactic ID is as follows:
 
     .. code-block:: text
 
@@ -60,15 +55,11 @@ def validate_mitre_tactic_id(function: Callable) -> Callable:
         |
         +-> Prefix "TA" meaning "Tactic"
     
-    parameters
-    ----------
-    function : Callable
-        The function to be wrapped.
-
-    returns
-    -------
-    Callable
-        The wrapped function that requires the MITRE ATT&CK tactic ID with valid format
+    :param function: The function to be wrapped.
+    :type function: Callable
+    :return: The wrapped function that requires the MITRE ATT&CK tactic ID with valid format.
+    :rtype: Callable
+    :raises ValueError: If the MITRE ATT&CK tactic ID is not in the valid format.
     """
     @wraps(function)
     def wrapper(*args, **kwargs):
@@ -91,7 +82,7 @@ def validate_mitre_mitigation_id(function: Callable) -> Callable:
     """
     A wrapper function to validate the MITRE ATT&CK mitigation ID.
 
-    The format of the MITRE ATT&CK mitigation ID is the following:
+    The format of the MITRE ATT&CK mitigation ID is as follows:
 
     .. code-block:: text
 
@@ -101,15 +92,11 @@ def validate_mitre_mitigation_id(function: Callable) -> Callable:
         |
         +-> Prefix "M" meaning "Mitigation"
 
-    parameters
-    ----------
-    function : Callable
-        The function to be wrapped.
-
-    returns
-    -------
-    Callable
-        The wrapped function that requires the MITRE ATT&CK mitigation ID with valid format
+    :param function: The function to be wrapped.
+    :type function: Callable
+    :return: The wrapped function that requires the MITRE ATT&CK mitigation ID with valid format.
+    :rtype: Callable
+    :raises ValueError: If the MITRE ATT&CK mitigation ID is not in the valid format.
     """
     @wraps(function)
     def wrapper(*args, **kwargs):
@@ -123,6 +110,43 @@ def validate_mitre_mitigation_id(function: Callable) -> Callable:
             if isinstance(key, str) and key.endswith("_mitigation_id"):
                 if not re.match(pattern, value):
                     raise ValueError("Invalid MITRE ATT&CK mitigation ID, should be in the format of MXXXX")
+        
+        return function(*args, **kwargs)
+    
+    return wrapper
+
+def validate_mitre_group_id(function: Callable) -> Callable:
+    """
+    A wrapper function to validate the MITRE ATT&CK group ID.
+
+    The format of the MITRE ATT&CK group ID is as follows:
+
+    .. code-block:: text
+
+        GXXXX
+        ||
+        |+-> Group ID (4 digits)
+        |
+        +-> Prefix "G" meaning "Group"
+
+    :param function: The function to be wrapped.
+    :type function: Callable
+    :return: The wrapped function that requires the MITRE ATT&CK group ID with valid format.
+    :rtype: Callable
+    :raises ValueError: If the MITRE ATT&CK group ID is not in the valid format.
+    """
+    @wraps(function)
+    def wrapper(*args, **kwargs):
+        pattern = r"^G\d{4}$"
+        # Iterate through all arguments and keyword arguments
+        for arg in args:
+            if isinstance(arg, str) and not re.match(pattern, arg):
+                raise ValueError("Invalid MITRE ATT&CK group ID, should be in the format of GXXXX")
+        
+        for key, value in kwargs.items():
+            if isinstance(key, str) and key.endswith("group_id"):
+                if not re.match(pattern, value):
+                    raise ValueError("Invalid MITRE ATT&CK group ID, should be in the format of GXXXX")
         
         return function(*args, **kwargs)
     

@@ -51,6 +51,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">MITREAttackScrapper</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="MITREAttackScrapper.html">MITREAttackScrapper package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="MITREAttackScrapper.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="MITREAttackScrapper.cti.html">MITREAttackScrapper.cti package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="MITREAttackScrapper.mitigations.html">MITREAttackScrapper.mitigations package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="MITREAttackScrapper.tactics.html">MITREAttackScrapper.tactics package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="MITREAttackScrapper.techniques.html">MITREAttackScrapper.techniques package</a></li>
@@ -100,10 +101,38 @@
 <section id="module-MITREAttackScrapper.utils.mitre_id_validator">
 <span id="mitreattackscrapper-utils-mitre-id-validator-module"></span><h2>MITREAttackScrapper.utils.mitre_id_validator module<a class="headerlink" href="#module-MITREAttackScrapper.utils.mitre_id_validator" title="Link to this heading"></a></h2>
 <dl class="py function">
+<dt class="sig sig-object py" id="MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_group_id">
+<span class="sig-prename descclassname"><span class="pre">MITREAttackScrapper.utils.mitre_id_validator.</span></span><span class="sig-name descname"><span class="pre">validate_mitre_group_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="headerlink" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_group_id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper function to validate the MITRE ATT&amp;CK group ID.</p>
+<p>The format of the MITRE ATT&amp;CK group ID is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>GXXXX
+||
+|+-&gt; Group ID (4 digits)
+|
++-&gt; Prefix &quot;G&quot; meaning &quot;Group&quot;
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>function</strong> (<em>Callable</em>) – The function to be wrapped.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The wrapped function that requires the MITRE ATT&amp;CK group ID with valid format.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the MITRE ATT&amp;CK group ID is not in the valid format.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_mitigation_id">
 <span class="sig-prename descclassname"><span class="pre">MITREAttackScrapper.utils.mitre_id_validator.</span></span><span class="sig-name descname"><span class="pre">validate_mitre_mitigation_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="headerlink" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_mitigation_id" title="Link to this definition"></a></dt>
 <dd><p>A wrapper function to validate the MITRE ATT&amp;CK mitigation ID.</p>
-<p>The format of the MITRE ATT&amp;CK mitigation ID is the following:</p>
+<p>The format of the MITRE ATT&amp;CK mitigation ID is as follows:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MXXXX
 ||
 |+-&gt; Mitigation ID (4 digits)
@@ -116,10 +145,13 @@
 <dd class="field-odd"><p><strong>function</strong> (<em>Callable</em>) – The function to be wrapped.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The wrapped function that requires the MITRE ATT&amp;CK mitigation ID with valid format</p>
+<dd class="field-even"><p>The wrapped function that requires the MITRE ATT&amp;CK mitigation ID with valid format.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Callable</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the MITRE ATT&amp;CK mitigation ID is not in the valid format.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -128,7 +160,7 @@
 <dt class="sig sig-object py" id="MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_tactic_id">
 <span class="sig-prename descclassname"><span class="pre">MITREAttackScrapper.utils.mitre_id_validator.</span></span><span class="sig-name descname"><span class="pre">validate_mitre_tactic_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="headerlink" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_tactic_id" title="Link to this definition"></a></dt>
 <dd><p>A wrapper function to validate the MITRE ATT&amp;CK tactic ID.</p>
-<p>The format of the MITRE ATT&amp;CK tactic ID is the following:</p>
+<p>The format of the MITRE ATT&amp;CK tactic ID is as follows:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>TAXXXX
 | |
 | +-&gt; Tactic ID (4 digits)
@@ -141,10 +173,13 @@
 <dd class="field-odd"><p><strong>function</strong> (<em>Callable</em>) – The function to be wrapped.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The wrapped function that requires the MITRE ATT&amp;CK tactic ID with valid format</p>
+<dd class="field-even"><p>The wrapped function that requires the MITRE ATT&amp;CK tactic ID with valid format.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Callable</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the MITRE ATT&amp;CK tactic ID is not in the valid format.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -153,14 +188,14 @@
 <dt class="sig sig-object py" id="MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_technique_id">
 <span class="sig-prename descclassname"><span class="pre">MITREAttackScrapper.utils.mitre_id_validator.</span></span><span class="sig-name descname"><span class="pre">validate_mitre_technique_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="headerlink" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_technique_id" title="Link to this definition"></a></dt>
 <dd><p>A wrapper function to validate the MITRE ATT&amp;CK technique ID.</p>
-<p>The format of the MITRE ATT&amp;CK technique ID is the following:</p>
+<p>The format of the MITRE ATT&amp;CK technique ID is as follows:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>TXXXX[.YYY]
 ||     |
-||     +-&gt; Optional sub-technique ID (2 digits)
+||     +-&gt; Optional sub-technique ID (3 digits)
 ||
 |+-&gt; Technique ID (4 digits)
 |
-+-&gt; Prefix &quot;T&#39; meaning &quot;Technique&quot;
++-&gt; Prefix &quot;T&quot; meaning &quot;Technique&quot;
 </pre></div>
 </div>
 <dl class="field-list simple">
@@ -168,10 +203,13 @@
 <dd class="field-odd"><p><strong>function</strong> (<em>Callable</em>) – The function to be wrapped.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The wrapped function that requires the MITRE ATT&amp;CK technique ID with valid format</p>
+<dd class="field-even"><p>The wrapped function that requires the MITRE ATT&amp;CK technique ID with valid format.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Callable</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the MITRE ATT&amp;CK technique ID is not in the valid format.</p>
 </dd>
 </dl>
 </dd></dl>

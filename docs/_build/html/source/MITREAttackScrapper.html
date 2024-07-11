@@ -24,7 +24,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="MITREAttackScrapper.mitigations package" href="MITREAttackScrapper.mitigations.html" />
+    <link rel="next" title="MITREAttackScrapper.cti package" href="MITREAttackScrapper.cti.html" />
     <link rel="prev" title="MITREAttackScrapper" href="modules.html" /> 
 </head>
 
@@ -52,6 +52,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">MITREAttackScrapper</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">MITREAttackScrapper package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="MITREAttackScrapper.cti.html">MITREAttackScrapper.cti package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="MITREAttackScrapper.mitigations.html">MITREAttackScrapper.mitigations package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="MITREAttackScrapper.tactics.html">MITREAttackScrapper.tactics package</a></li>
 <li class="toctree-l4"><a class="reference internal" href="MITREAttackScrapper.techniques.html">MITREAttackScrapper.techniques package</a></li>
@@ -101,6 +102,19 @@
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="MITREAttackScrapper.cti.html">MITREAttackScrapper.cti package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MITREAttackScrapper.cti.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MITREAttackScrapper.cti.html#module-MITREAttackScrapper.cti.groups">MITREAttackScrapper.cti.groups module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MITREAttackScrapper.cti.html#MITREAttackScrapper.cti.groups.MITREAttackGroups"><code class="docutils literal notranslate"><span class="pre">MITREAttackGroups</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="MITREAttackScrapper.cti.html#MITREAttackScrapper.cti.groups.MITREAttackGroups.get"><code class="docutils literal notranslate"><span class="pre">MITREAttackGroups.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="MITREAttackScrapper.cti.html#MITREAttackScrapper.cti.groups.MITREAttackGroups.get_list"><code class="docutils literal notranslate"><span class="pre">MITREAttackGroups.get_list()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="MITREAttackScrapper.cti.html#module-MITREAttackScrapper.cti">Module contents</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="MITREAttackScrapper.mitigations.html">MITREAttackScrapper.mitigations package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="MITREAttackScrapper.mitigations.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="MITREAttackScrapper.mitigations.html#module-MITREAttackScrapper.mitigations.enterprise">MITREAttackScrapper.mitigations.enterprise module</a><ul>
@@ -150,6 +164,7 @@
 <li class="toctree-l1"><a class="reference internal" href="MITREAttackScrapper.utils.html">MITREAttackScrapper.utils package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="MITREAttackScrapper.utils.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="MITREAttackScrapper.utils.html#module-MITREAttackScrapper.utils.mitre_id_validator">MITREAttackScrapper.utils.mitre_id_validator module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MITREAttackScrapper.utils.html#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_group_id"><code class="docutils literal notranslate"><span class="pre">validate_mitre_group_id()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="MITREAttackScrapper.utils.html#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_mitigation_id"><code class="docutils literal notranslate"><span class="pre">validate_mitre_mitigation_id()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="MITREAttackScrapper.utils.html#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_tactic_id"><code class="docutils literal notranslate"><span class="pre">validate_mitre_tactic_id()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="MITREAttackScrapper.utils.html#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_technique_id"><code class="docutils literal notranslate"><span class="pre">validate_mitre_technique_id()</span></code></a></li>
@@ -253,7 +268,7 @@ Since all the classes using this superclass have the same structure, the same co
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="modules.html" class="btn btn-neutral float-left" title="MITREAttackScrapper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="MITREAttackScrapper.mitigations.html" class="btn btn-neutral float-right" title="MITREAttackScrapper.mitigations package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="MITREAttackScrapper.cti.html" class="btn btn-neutral float-right" title="MITREAttackScrapper.cti package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

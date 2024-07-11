@@ -7,6 +7,7 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
+   MITREAttackScrapper.cti
    MITREAttackScrapper.mitigations
    MITREAttackScrapper.tactics
    MITREAttackScrapper.techniques

@@ -17,7 +17,7 @@ Refer to the **[documentation](https://knightchaser.github.io/MITREAttackScrappe
   - [ ] MITRE ATT&CK Mobile Tactics
   - [ ] MITRE ATT&CK ICS Tactics
 - **CTI**
-  - [ ] MITRE ATT&CK CTI Groups
+  - [x] MITRE ATT&CK CTI Groups
   - [ ] MITRE ATT&CK CTI Software
   - [ ] MITRE ATT&CK CTI Campaigns
 - **Defenses/Mitigations**
