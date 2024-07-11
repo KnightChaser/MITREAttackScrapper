@@ -1,22 +1,4 @@
 # MITREAttackScrapper/mitigations/enterprise.py
-"""
-MITRE ATT&CK Enterprise Mitigations
-===================================
-
-This module contains methods to parse MITRE ATT&CK Enterprise Mitigations.
-
-Classes:
---------
-MITREAttackEnterpriseMitigations : Parses MITRE ATT&CK Enterprise Mitigations.
-
-Methods:
---------
-get_list() -> List[Dict[str, Any]] :
-    Get the list of all MITRE ATT&CK mitigations for Enterprise.
-
-get(mitigation_id: str) -> Dict[str, Any] :
-    Get the details of a specific MITRE ATT&CK mitigation for Enterprise.
-"""
 
 import httpx
 from bs4 import BeautifulSoup, Tag
@@ -31,23 +13,18 @@ from utils.scrapping_helper import get_text_after_span
 from utils.mitre_id_validator import validate_mitre_mitigation_id
 
 class MITREAttackEnterpriseMitigations(MITREAttackInformation):
-    """
-    A class containing methods to parse MITRE ATT&CK Enterprise Mitigations.
-    """
+    """A class containing methods to parse MITRE ATT&CK Enterprise Mitigations."""
 
     @staticmethod
     def get_list() -> List[Dict[str, Any]]:
         """
         Get the list of all MITRE ATT&CK mitigations for Enterprise.
 
-        Returns
-        -------
-        List[Dict[str, Any]]
-            A list of dictionaries containing MITRE ATT&CK mitigations data.
+        :return: A list of dictionaries containing MITRE ATT&CK mitigations data.
+        :rtype: List[Dict[str, Any]]
+        :raises RuntimeError: If there's a failure in fetching data from the MITRE ATT&CK website.
 
-        Example
-        -------
-        The structure of the returned data is as follows:
+        :Example:
 
         .. code-block:: python
 
@@ -58,7 +35,7 @@ class MITREAttackEnterpriseMitigations(MITREAttackInformation):
                     "description": "Mitigation Description",
                     "url": "https://attack.mitre.org/mitigations/M1234/"
                 },
-                ...
+                # ... more mitigation entries
             ]
         """
         target_url = "https://attack.mitre.org/mitigations/enterprise/"
@@ -93,29 +70,16 @@ class MITREAttackEnterpriseMitigations(MITREAttackInformation):
         """
         Get the details of a specific MITRE ATT&CK mitigation for Enterprise.
 
-        Parameters
-        ----------
-        mitigation_id : str
-            The ID of the specific MITRE ATT&CK mitigation.
+        :param mitigation_id: The ID of the specific MITRE ATT&CK mitigation.
+        :type mitigation_id: str
+        :return: A dictionary containing the details of the specified MITRE ATT&CK mitigation.
+        :rtype: Dict[str, Any]
+        :raises ValueError: If the mitigation ID does not exist in the MITRE ATT&CK Enterprise mitigations.
+        :raises RuntimeError: If there's a failure in fetching data from the MITRE ATT&CK website.
 
-        Returns
-        -------
-        Dict[str, Any]
-            A dictionary containing the details of the specified MITRE ATT&CK mitigation.
+        :Example:
 
-        Raises
-        ------
-        ValueError
-            If the mitigation ID does not exist in the MITRE ATT&CK Enterprise mitigations.
-        RuntimeError
-            If there's a failure in fetching data from the MITRE ATT&CK website.
-
-        
-        Example
-        -------
-        The structure of the returned data is as follows:
-        
-        .. code-block:: json
+        .. code-block:: python
 
             {
                 "id": "M1234",
@@ -178,10 +142,10 @@ class MITREAttackEnterpriseMitigations(MITREAttackInformation):
         mitigation_data["version"] = get_text_after_span(card_body, "Version:")
         created_text = get_text_after_span(card_body, "Created:")
         if created_text:
-            mitigation_data["created"] = datetime.strptime(created_text, "%d %B %Y")
+            mitigation_data["created"] = datetime.strptime(created_text, "%d %B %Y").strftime("%Y-%m-%d")
         last_modified_text = get_text_after_span(card_body, "Last Modified:")
         if last_modified_text:
-            mitigation_data["last_modified"] = datetime.strptime(last_modified_text, "%d %B %Y")
+            mitigation_data["last_modified"] = datetime.strptime(last_modified_text, "%d %B %Y").strftime("%Y-%m-%d")
 
         # Parse description
         description_div: Union[Tag, None] = soup.select_one("div.description-body")
@@ -192,29 +156,29 @@ class MITREAttackEnterpriseMitigations(MITREAttackInformation):
         techniques_table: Union[Tag, None] = soup.find("h2", string="Techniques Addressed by Mitigation").find_next("table")
         if techniques_table:
             latest_domain = None
-            latest_technique_id = None
+            latest_main_technique_id = None
             for row in techniques_table.find("tbody").find_all("tr"):
                 cells = row.find_all("td")
                 if len(cells) == 5:
                     domain = cells[0].get_text(strip=True) if cells[0].get_text(strip=True) else latest_domain
                     latest_domain = domain
 
-                    technique_id_main = cells[1].find("a").get_text(strip=True) if cells[1].find("a") else latest_technique_id
-                    latest_technique_id = technique_id_main
-                    technique_id_sub = cells[2].find("a").get_text(strip=True) if cells[2].find("a") else None
-                    if technique_id_sub:
-                        technique_id = f"{technique_id_main}{technique_id_sub}"
-                        technique_url = f"https://attack.mitre.org/techniques/{technique_id_main}/{technique_id_sub.replace('.', '')}/"
+                    main_technique_id = cells[1].find("a").get_text(strip=True) if cells[1].find("a") else latest_main_technique_id
+                    latest_main_technique_id = main_technique_id
+                    sub_technique_id = cells[2].find("a").get_text(strip=True) if cells[2].find("a") else None
+                    if sub_technique_id:
+                        technique_id = f"{main_technique_id}{sub_technique_id}"
+                        technique_url = f"https://attack.mitre.org/techniques/{main_technique_id}/{sub_technique_id.replace('.', '')}/"
                     else:
-                        technique_id = technique_id_main
-                        technique_url = f"https://attack.mitre.org/techniques/{technique_id_main}/"
+                        technique_id = main_technique_id
+                        technique_url = f"https://attack.mitre.org/techniques/{main_technique_id}/"
 
-                    technique_name_main = cells[3].find("a").get_text(strip=True)
-                    technique_name_sub = cells[3].find_all("a")[1].get_text(strip=True) if len(cells[3].find_all("a")) > 1 else None
-                    if technique_name_sub:
-                        technique_name = f"{technique_name_main} ({technique_name_sub})" 
+                    main_technique_name = cells[3].find("a").get_text(strip=True)
+                    sub_technique_name = cells[3].find_all("a")[1].get_text(strip=True) if len(cells[3].find_all("a")) > 1 else None
+                    if sub_technique_name:
+                        technique_name = f"{main_technique_name} ({sub_technique_name})" 
                     else:
-                        technique_name = technique_name_main
+                        technique_name = main_technique_name
 
                     technique_use = cells[4].get_text(" ", strip=True)
                     
@@ -226,8 +190,8 @@ class MITREAttackEnterpriseMitigations(MITREAttackInformation):
                         "url": technique_url
                     })
 
-        # Parse referencescgh
-        references_div: Union[Tag, None] = soup.find("h2", string="References").find_next("div")
+        # Parse references
+        references_div: Union[Tag, None] = soup.find("h2", string="References").find_next("div") if soup.find("h2", string="References") else None
         reference_number: int = 1
         if references_div:
             for li in references_div.find_all("li"):
