@@ -1,108 +1,351 @@
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="../">
-<head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MITREAttackScrapper.utils package &mdash; MITREAttackScrapper  documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>MITREAttackScrapper.utils package &#8212; MITREAttackScrapper  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
   
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-        <script src="../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/js/theme.js"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'source/MITREAttackScrapper.utils';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="MITREAttackScrapper.techniques package" href="MITREAttackScrapper.techniques.html" /> 
-</head>
+    <link rel="prev" title="MITREAttackScrapper.techniques package" href="MITREAttackScrapper.techniques.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-          
-          
-          <a href="../index.html" class="icon icon-home">
-            MITREAttackScrapper
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">MITREAttackScrapper</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="MITREAttackScrapper.html">MITREAttackScrapper package</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="MITREAttackScrapper.html#subpackages">Subpackages</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="MITREAttackScrapper.cti.html">MITREAttackScrapper.cti package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="MITREAttackScrapper.mitigations.html">MITREAttackScrapper.mitigations package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="MITREAttackScrapper.tactics.html">MITREAttackScrapper.tactics package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="MITREAttackScrapper.techniques.html">MITREAttackScrapper.techniques package</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">MITREAttackScrapper.utils package</a></li>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">MITREAttackScrapper  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="modules.html">MITREAttackScrapper</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="MITREAttackScrapper.html">MITREAttackScrapper package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="MITREAttackScrapper.cti.html">MITREAttackScrapper.cti package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MITREAttackScrapper.mitigations.html">MITREAttackScrapper.mitigations package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MITREAttackScrapper.tactics.html">MITREAttackScrapper.tactics package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="MITREAttackScrapper.techniques.html">MITREAttackScrapper.techniques package</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">MITREAttackScrapper.utils package</a></li>
 </ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="MITREAttackScrapper.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="MITREAttackScrapper.html#module-MITREAttackScrapper.superclass">MITREAttackScrapper.superclass module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="MITREAttackScrapper.html#module-MITREAttackScrapper">Module contents</a></li>
+</details></li>
 </ul>
-</li>
-</ul>
-</li>
+</details></li>
 </ul>
 
-        </div>
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
       </div>
-    </nav>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">MITREAttackScrapper</a>
-      </nav>
+<div class="sbt-scroll-pixel-helper"></div>
 
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="modules.html">MITREAttackScrapper</a></li>
-          <li class="breadcrumb-item"><a href="MITREAttackScrapper.html">MITREAttackScrapper package</a></li>
-      <li class="breadcrumb-item active">MITREAttackScrapper.utils package</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/source/MITREAttackScrapper.utils.rst.txt" rel="nofollow"> View page source</a>
-      </li>
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/source/MITREAttackScrapper.utils.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
   </ul>
-  <hr/>
 </div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>MITREAttackScrapper.utils package</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-MITREAttackScrapper.utils.mitre_id_validator">MITREAttackScrapper.utils.mitre_id_validator module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_group_id"><code class="docutils literal notranslate"><span class="pre">validate_mitre_group_id()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_mitigation_id"><code class="docutils literal notranslate"><span class="pre">validate_mitre_mitigation_id()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_tactic_id"><code class="docutils literal notranslate"><span class="pre">validate_mitre_tactic_id()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_technique_id"><code class="docutils literal notranslate"><span class="pre">validate_mitre_technique_id()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-MITREAttackScrapper.utils.scrapping_helper">MITREAttackScrapper.utils.scrapping_helper module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.utils.scrapping_helper.get_links_after_span"><code class="docutils literal notranslate"><span class="pre">get_links_after_span()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.utils.scrapping_helper.get_text_after_span"><code class="docutils literal notranslate"><span class="pre">get_text_after_span()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-MITREAttackScrapper.utils">Module contents</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section id="mitreattackscrapper-utils-package">
-<h1>MITREAttackScrapper.utils package<a class="headerlink" href="#mitreattackscrapper-utils-package" title="Link to this heading"></a></h1>
+<h1>MITREAttackScrapper.utils package<a class="headerlink" href="#mitreattackscrapper-utils-package" title="Link to this heading">#</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
 </section>
 <section id="module-MITREAttackScrapper.utils.mitre_id_validator">
-<span id="mitreattackscrapper-utils-mitre-id-validator-module"></span><h2>MITREAttackScrapper.utils.mitre_id_validator module<a class="headerlink" href="#module-MITREAttackScrapper.utils.mitre_id_validator" title="Link to this heading"></a></h2>
+<span id="mitreattackscrapper-utils-mitre-id-validator-module"></span><h2>MITREAttackScrapper.utils.mitre_id_validator module<a class="headerlink" href="#module-MITREAttackScrapper.utils.mitre_id_validator" title="Link to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_group_id">
-<span class="sig-prename descclassname"><span class="pre">MITREAttackScrapper.utils.mitre_id_validator.</span></span><span class="sig-name descname"><span class="pre">validate_mitre_group_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="headerlink" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_group_id" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">MITREAttackScrapper.utils.mitre_id_validator.</span></span><span class="sig-name descname"><span class="pre">validate_mitre_group_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="headerlink" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_group_id" title="Link to this definition">#</a></dt>
 <dd><p>A wrapper function to validate the MITRE ATT&amp;CK group ID.</p>
 <p>The format of the MITRE ATT&amp;CK group ID is as follows:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>GXXXX
@@ -130,7 +373,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_mitigation_id">
-<span class="sig-prename descclassname"><span class="pre">MITREAttackScrapper.utils.mitre_id_validator.</span></span><span class="sig-name descname"><span class="pre">validate_mitre_mitigation_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="headerlink" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_mitigation_id" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">MITREAttackScrapper.utils.mitre_id_validator.</span></span><span class="sig-name descname"><span class="pre">validate_mitre_mitigation_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="headerlink" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_mitigation_id" title="Link to this definition">#</a></dt>
 <dd><p>A wrapper function to validate the MITRE ATT&amp;CK mitigation ID.</p>
 <p>The format of the MITRE ATT&amp;CK mitigation ID is as follows:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MXXXX
@@ -158,7 +401,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_tactic_id">
-<span class="sig-prename descclassname"><span class="pre">MITREAttackScrapper.utils.mitre_id_validator.</span></span><span class="sig-name descname"><span class="pre">validate_mitre_tactic_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="headerlink" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_tactic_id" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">MITREAttackScrapper.utils.mitre_id_validator.</span></span><span class="sig-name descname"><span class="pre">validate_mitre_tactic_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="headerlink" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_tactic_id" title="Link to this definition">#</a></dt>
 <dd><p>A wrapper function to validate the MITRE ATT&amp;CK tactic ID.</p>
 <p>The format of the MITRE ATT&amp;CK tactic ID is as follows:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>TAXXXX
@@ -186,7 +429,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_technique_id">
-<span class="sig-prename descclassname"><span class="pre">MITREAttackScrapper.utils.mitre_id_validator.</span></span><span class="sig-name descname"><span class="pre">validate_mitre_technique_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="headerlink" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_technique_id" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">MITREAttackScrapper.utils.mitre_id_validator.</span></span><span class="sig-name descname"><span class="pre">validate_mitre_technique_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span></span></span><a class="headerlink" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_technique_id" title="Link to this definition">#</a></dt>
 <dd><p>A wrapper function to validate the MITRE ATT&amp;CK technique ID.</p>
 <p>The format of the MITRE ATT&amp;CK technique ID is as follows:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>TXXXX[.YYY]
@@ -216,10 +459,10 @@
 
 </section>
 <section id="module-MITREAttackScrapper.utils.scrapping_helper">
-<span id="mitreattackscrapper-utils-scrapping-helper-module"></span><h2>MITREAttackScrapper.utils.scrapping_helper module<a class="headerlink" href="#module-MITREAttackScrapper.utils.scrapping_helper" title="Link to this heading"></a></h2>
+<span id="mitreattackscrapper-utils-scrapping-helper-module"></span><h2>MITREAttackScrapper.utils.scrapping_helper module<a class="headerlink" href="#module-MITREAttackScrapper.utils.scrapping_helper" title="Link to this heading">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="MITREAttackScrapper.utils.scrapping_helper.get_links_after_span">
-<span class="sig-prename descclassname"><span class="pre">MITREAttackScrapper.utils.scrapping_helper.</span></span><span class="sig-name descname"><span class="pre">get_links_after_span</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">card_body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#MITREAttackScrapper.utils.scrapping_helper.get_links_after_span" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">MITREAttackScrapper.utils.scrapping_helper.</span></span><span class="sig-name descname"><span class="pre">get_links_after_span</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">card_body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#MITREAttackScrapper.utils.scrapping_helper.get_links_after_span" title="Link to this definition">#</a></dt>
 <dd><p>Helper function to extract the links after the span element with the given label.</p>
 <p>For example, It can be used to extract the links after a label in the following format:</p>
 <div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Label:<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;https://example1.com&quot;</span><span class="p">&gt;</span>Link1<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
@@ -244,7 +487,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="MITREAttackScrapper.utils.scrapping_helper.get_text_after_span">
-<span class="sig-prename descclassname"><span class="pre">MITREAttackScrapper.utils.scrapping_helper.</span></span><span class="sig-name descname"><span class="pre">get_text_after_span</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">card_body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#MITREAttackScrapper.utils.scrapping_helper.get_text_after_span" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">MITREAttackScrapper.utils.scrapping_helper.</span></span><span class="sig-name descname"><span class="pre">get_text_after_span</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">card_body</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#MITREAttackScrapper.utils.scrapping_helper.get_text_after_span" title="Link to this definition">#</a></dt>
 <dd><p>Helper function to extract the text after the span element with the given label.</p>
 <p>For example, It can be used to extract the text after a label in the following format:</p>
 <div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Label:<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span> Text
@@ -268,38 +511,112 @@
 
 </section>
 <section id="module-MITREAttackScrapper.utils">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-MITREAttackScrapper.utils" title="Link to this heading"></a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-MITREAttackScrapper.utils" title="Link to this heading">#</a></h2>
 </section>
 </section>
 
 
-           </div>
-          </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="MITREAttackScrapper.techniques.html" class="btn btn-neutral float-left" title="MITREAttackScrapper.techniques package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
+                </article>
+              
 
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2024, KnightChaser.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
-        </div>
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="MITREAttackScrapper.techniques.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">MITREAttackScrapper.techniques package</p>
       </div>
-    </section>
-  </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(true);
-      });
-  </script> 
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
-</body>
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-MITREAttackScrapper.utils.mitre_id_validator">MITREAttackScrapper.utils.mitre_id_validator module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_group_id"><code class="docutils literal notranslate"><span class="pre">validate_mitre_group_id()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_mitigation_id"><code class="docutils literal notranslate"><span class="pre">validate_mitre_mitigation_id()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_tactic_id"><code class="docutils literal notranslate"><span class="pre">validate_mitre_tactic_id()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.utils.mitre_id_validator.validate_mitre_technique_id"><code class="docutils literal notranslate"><span class="pre">validate_mitre_technique_id()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-MITREAttackScrapper.utils.scrapping_helper">MITREAttackScrapper.utils.scrapping_helper module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.utils.scrapping_helper.get_links_after_span"><code class="docutils literal notranslate"><span class="pre">get_links_after_span()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.utils.scrapping_helper.get_text_after_span"><code class="docutils literal notranslate"><span class="pre">get_text_after_span()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-MITREAttackScrapper.utils">Module contents</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By KnightChaser
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, KnightChaser.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
 </html>
