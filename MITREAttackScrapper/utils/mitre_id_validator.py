@@ -33,7 +33,7 @@ def validate_mitre_technique_id(function: Callable) -> Callable:
                 raise ValueError("Invalid MITRE ATT&CK technique ID, should be in the format of TXXXX[.YYY]")
         
         for key, value in kwargs.items():
-            if isinstance(key, str) and key.endswith("_technique_id"):
+            if isinstance(key, str) and key.endswith("technique_id"):
                 if not re.match(pattern, value):
                     raise ValueError("Invalid MITRE ATT&CK technique ID, should be in the format of TXXXX[.YYY]")
         
@@ -70,7 +70,7 @@ def validate_mitre_tactic_id(function: Callable) -> Callable:
                 raise ValueError("Invalid MITRE ATT&CK tactic ID, should be in the format of TAXXXX")
         
         for key, value in kwargs.items():
-            if isinstance(key, str) and key.endswith("_tactic_id"):
+            if isinstance(key, str) and key.endswith("tactic_id"):
                 if not re.match(pattern, value):
                     raise ValueError("Invalid MITRE ATT&CK tactic ID, should be in the format of TAXXXX")
         
@@ -107,7 +107,7 @@ def validate_mitre_mitigation_id(function: Callable) -> Callable:
                 raise ValueError("Invalid MITRE ATT&CK mitigation ID, should be in the format of MXXXX")
         
         for key, value in kwargs.items():
-            if isinstance(key, str) and key.endswith("_mitigation_id"):
+            if isinstance(key, str) and key.endswith("mitigation_id"):
                 if not re.match(pattern, value):
                     raise ValueError("Invalid MITRE ATT&CK mitigation ID, should be in the format of MXXXX")
         

@@ -180,7 +180,6 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
             return MITREAttackEnterpriseTechniques.get_main_technique(technique_id=technique_id)
 
     @staticmethod
-    @validate_mitre_technique_id
     def get_sub_technique(main_technique_id: str, sub_technique_id: str) -> Dict[str, Any]:
         """
         Given a main and sub technique ID, return the sub technique information.
@@ -393,7 +392,6 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         return technique_data
 
     @staticmethod
-    @validate_mitre_technique_id
     def get_main_technique(technique_id: str) -> Dict[str, Any]:
         """
         Given a main technique ID, return the main technique information.

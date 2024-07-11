@@ -7,14 +7,14 @@
 from MITREAttackScrapper.techniques.enterprise import MITREAttackEnterpriseTechniques
 
 if __name__ == '__main__':
-    detail = MITREAttackEnterpriseTechniques.get("T1548")
+    detail = MITREAttackEnterpriseTechniques.get("T1548.001")
     print(f"Technique: {detail['name']}")
     print(f"Platforms affected by this technique: {detail['platforms']}")
-    print(f"Number of sub-techniques: {len(detail['sub_techniques'])}")
+    print(f"Number of mitigation suggested: {len(detail['mitigations'])}")
 
     # Technique: Abuse Elevation Control Mechanism
     # Platforms affected by this technique: ['Azure AD', 'Google Workspace', 'IaaS', 'Linux', 'Office 365', 'Windows', 'macOS']
-    # Number of sub-techniques: 6
+    # Number of mitigation suggested: 1
 ```
 
 ### Note: Currently under development, not stable!!!
