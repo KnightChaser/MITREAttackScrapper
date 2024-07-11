@@ -321,7 +321,14 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-MITREAttackScrapper.cti.software">MITREAttackScrapper.cti.software module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-MITREAttackScrapper.cti.software">MITREAttackScrapper.cti.software module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.cti.software.MITREAttackCTISoftware"><code class="docutils literal notranslate"><span class="pre">MITREAttackCTISoftware</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.cti.software.MITREAttackCTISoftware.get"><code class="docutils literal notranslate"><span class="pre">MITREAttackCTISoftware.get()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.cti.software.MITREAttackCTISoftware.get_list"><code class="docutils literal notranslate"><span class="pre">MITREAttackCTISoftware.get_list()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-MITREAttackScrapper.cti">Module contents</a></li>
 </ul>
             </nav>
@@ -463,6 +470,111 @@ document.write(`
 </section>
 <section id="module-MITREAttackScrapper.cti.software">
 <span id="mitreattackscrapper-cti-software-module"></span><h2>MITREAttackScrapper.cti.software module<a class="headerlink" href="#module-MITREAttackScrapper.cti.software" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="MITREAttackScrapper.cti.software.MITREAttackCTISoftware">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">MITREAttackScrapper.cti.software.</span></span><span class="sig-name descname"><span class="pre">MITREAttackCTISoftware</span></span><a class="headerlink" href="#MITREAttackScrapper.cti.software.MITREAttackCTISoftware" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MITREAttackInformation</span></code></p>
+<p>A class containing methods to scrap MITRE ATT&amp;CK Softwares.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="MITREAttackScrapper.cti.software.MITREAttackCTISoftware.get">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">software_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#MITREAttackScrapper.cti.software.MITREAttackCTISoftware.get" title="Link to this definition">#</a></dt>
+<dd><p>Get the information of a specific MITRE ATT&amp;CK Software.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>software_id</strong> (<em>str</em>) – The ID of the software.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing information about the specific MITRE ATT&amp;CK Software.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, Any]</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the provided software_id is invalid.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>The return value will be in the following format:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;S0001&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;software 1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;malware&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;platforms&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;platform 1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;platform 2&quot;</span><span class="p">,</span>
+        <span class="o">...</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;version 1&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;20XX-XX-XX&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;last_modified&quot;</span><span class="p">:</span> <span class="s2">&quot;20XX-XX-XX&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;description of the software&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;techniques_used&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="s2">&quot;Enterprise&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;main_technique_id&quot;</span><span class="p">:</span> <span class="s2">&quot;T0001&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;main_technique_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Main Technique Name&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;main_technique_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://attack.mitre.org/techniques/T0001/&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;sub_technique_id&quot;</span><span class="p">:</span> <span class="s2">&quot;T0001.001&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;sub_technique_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Sub-Technique Name&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;sub_technique_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://attack.mitre.org/techniques/T0001/001/&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;use&quot;</span><span class="p">:</span> <span class="s2">&quot;Technique Use Description&quot;</span>
+        <span class="p">},</span>
+        <span class="c1"># ... more techniques</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;groups_that_use_this_software&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;GXXXX&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;group 1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;reference&quot;</span><span class="p">:</span> <span class="s2">&quot;https://attack.mitre.org/groups/GXXXX/&quot;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;references&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="mi">1</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Reference 1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com&quot;</span>
+        <span class="p">},</span>
+        <span class="c1"># ... more references</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="MITREAttackScrapper.cti.software.MITREAttackCTISoftware.get_list">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#MITREAttackScrapper.cti.software.MITREAttackCTISoftware.get_list" title="Link to this definition">#</a></dt>
+<dd><p>Get the list of all MITRE ATT&amp;CK Softwares.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of dictionaries containing the software’s name, id, and description.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List[Dict[str, Any]]</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>RuntimeError</strong> – If the data fetch from the MITRE ATT&amp;CK website fails.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>The return value will be in the following format:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;S0001&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;APT1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;associated_software&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;software1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;software2&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;APT1 is a Chinese threat group that has been attributed to China&#39;s People&#39;s Liberation Army (PLA) Third Department 12th Bureau.&quot;</span>
+    <span class="p">},</span>
+    <span class="c1"># ... more software</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="module-MITREAttackScrapper.cti">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-MITREAttackScrapper.cti" title="Link to this heading">#</a></h2>
@@ -523,7 +635,14 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-MITREAttackScrapper.cti.software">MITREAttackScrapper.cti.software module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-MITREAttackScrapper.cti.software">MITREAttackScrapper.cti.software module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.cti.software.MITREAttackCTISoftware"><code class="docutils literal notranslate"><span class="pre">MITREAttackCTISoftware</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.cti.software.MITREAttackCTISoftware.get"><code class="docutils literal notranslate"><span class="pre">MITREAttackCTISoftware.get()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#MITREAttackScrapper.cti.software.MITREAttackCTISoftware.get_list"><code class="docutils literal notranslate"><span class="pre">MITREAttackCTISoftware.get_list()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-MITREAttackScrapper.cti">Module contents</a></li>
 </ul>
   </nav></div>

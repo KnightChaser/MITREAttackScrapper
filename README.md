@@ -21,6 +21,12 @@ if __name__ == '__main__':
 
 ## How to use?
 Refer to the **[documentation](https://knightchaser.github.io/MITREAttackScrapper/)**! >_<
+- The documentation is based on **`sphinx-apidoc`**, which is an automated documentation tool for lazy Python and other language-based programmers.
+- Locally build the Sphinx document if there are some changes on the codebase. The GitHub page action will read the refreshed page built results and the GitHub page will be updated accordingly.
+```powershell
+sphinx-apidoc -f -o docs/source .\MITREAttackScrapper\
+./docs/make.bat html
+```
 
 ## Coverage
 - **TECHNIQUES**
