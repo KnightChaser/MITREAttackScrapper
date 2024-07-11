@@ -22,20 +22,12 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         """
         Get the list of all MITRE ATT&CK techniques for Enterprise.
 
-        Returns
-        -------
-        List[Dict[str, Any]]
-            A list of dictionaries containing technique information.
+        :return: A list of dictionaries containing technique information.
+        :rtype: List[Dict[str, Any]]
+        :raises RuntimeError: If there's a failure in fetching data from the MITRE ATT&CK website.
 
-        Raises
-        ------
-        RuntimeError
-            If there's a failure in fetching data from the MITRE ATT&CK website.
+        :Example:
 
-        Example
-        -------
-        The structure of the returned data is as follows:
-        
         .. code-block:: python
 
             [
@@ -70,7 +62,7 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         rows = table.find_all("tr", class_=["technique", "sub technique"])
         for row in rows:
             if "technique" == row["class"][0]:
-                # Parse the parent MITRE ATT&CK technique
+                # Parse the main MITRE ATT&CK technique
                 technique_link = row.find("a", href=True)
                 technique_id = technique_link.get_text(strip=True)
                 technique_url = "https://attack.mitre.org" + technique_link['href']
@@ -87,7 +79,7 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
                 })
 
             elif "sub" == row["class"][0] and "technique" == row["class"][1]:
-                # Parse the associated sub-techniques for the parent MITRE ATT&CK technique
+                # Parse the associated sub-techniques for the main MITRE ATT&CK technique
                 sub_technique_link = row.find("a", href=True)
                 sub_technique_id = data[-1]["id"] + sub_technique_link.get_text(strip=True)
                 sub_technique_url = "https://attack.mitre.org" + sub_technique_link['href']
@@ -110,32 +102,20 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         """
         Get the details of a specific MITRE ATT&CK technique for Enterprise.
 
-        Parameters
-        ----------
-        technique_id : str
-            The MITRE ATT&CK technique ID (e.g., T1548 or T1548.001).
+        :param technique_id: The MITRE ATT&CK technique ID (e.g., T1548 or T1548.001).
+        :type technique_id: str
+        :return: A dictionary containing technique information.
+        :rtype: Dict[str, Any]
+        :raises ValueError: If the technique ID is invalid or does not exist in the MITRE ATT&CK framework.
+        :raises RuntimeError: If there's a failure in fetching data from the MITRE ATT&CK website.
 
-        Returns
-        -------
-        Dict[str, Any]
-            A dictionary containing technique information.
+        :Example:
 
-        Raises
-        ------
-        ValueError
-            If the technique ID is invalid or does not exist in the MITRE ATT&CK framework.
-        RuntimeError
-            If there's a failure in fetching data from the MITRE ATT&CK website.
-
-        Example
-        -------
-        The structure of the returned data is as follows:
-        
         .. code-block:: python
 
             {
                 "id": "T0001.001",
-                "parent_technique_id": "T0001",
+                "main_technique_id": "T0001",
                 "tactics": [
                     {
                         "name": "Tactic Name",
@@ -182,7 +162,6 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
                     ...
                 }
             }
-
         """
         if not technique_id:
             raise ValueError("Technique ID is required")
@@ -192,50 +171,36 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
             raise ValueError("Invalid technique ID format. Please provide a valid technique ID.")
         
         if "." in technique_id:
-            # Child technique
-            parent_technique_id, child_technique_id = technique_id.split(".")
-            return MITREAttackEnterpriseTechniques.get_child_technique(parent_technique_id=parent_technique_id, 
-                                                                       child_technique_id=child_technique_id)
+            # Sub technique
+            main_technique_id, sub_technique_id = technique_id.split(".")
+            return MITREAttackEnterpriseTechniques.get_sub_technique(main_technique_id=main_technique_id, 
+                                                                     sub_technique_id=sub_technique_id)
         else:
-            # Parent technique
-            return MITREAttackEnterpriseTechniques.get_parent_technique(technique_id=technique_id)
+            # Main technique
+            return MITREAttackEnterpriseTechniques.get_main_technique(technique_id=technique_id)
 
     @staticmethod
     @validate_mitre_technique_id
-    def get_child_technique(parent_technique_id: str, child_technique_id: str) -> Dict[str, Any]:
+    def get_sub_technique(main_technique_id: str, sub_technique_id: str) -> Dict[str, Any]:
         """
-        Given a parent and child technique ID, return the child technique information.
+        Given a main and sub technique ID, return the sub technique information.
 
-        parameters
-        ----------
-        parent_technique_id : str
-            The parent MITRE ATT&CK technique ID (e.g., T1548).
-        
-        child_technique_id : str
-            The child MITRE ATT&CK technique ID (e.g., T1548.001).
+        :param main_technique_id: The main MITRE ATT&CK technique ID (e.g., T1548).
+        :type main_technique_id: str
+        :param sub_technique_id: The sub MITRE ATT&CK technique ID (e.g., T1548.001).
+        :type sub_technique_id: str
+        :return: A dictionary containing the sub technique information.
+        :rtype: Dict[str, Any]
+        :raises ValueError: If the main and sub technique IDs are invalid or do not exist in the MITRE ATT&CK framework.
+        :raises RuntimeError: If there's a failure in fetching data from the MITRE ATT&CK website.
 
-        returns
-        -------
-        Dict[str, Any]
-            A dictionary containing the child technique information.
-
-        raises
-        ------
-        ValueError
-            If the parent and child technique IDs are invalid or do not exist in the MITRE ATT&CK framework.
-
-        RuntimeError
-            If there's a failure in fetching data from the MITRE ATT&CK website.
-
-        Example
-        -------
-        The structure of the returned data is as follows:
+        :Example:
 
         .. code-block:: python
 
             {
                 "id": "T0001.001",
-                "parent_technique_id": "T0001",
+                "main_technique_id": "T0001",
                 "tactics": [
                     {
                         "name": "Tactic Name",
@@ -282,17 +247,16 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
                     ...
                 }
             }
-        
         """
         # Parameter existence check
-        if not parent_technique_id or not child_technique_id:
-            raise ValueError("Parent and child technique IDs are required")
+        if not main_technique_id or not sub_technique_id:
+            raise ValueError("Main and sub technique IDs are required")
 
-        request_url = f"https://attack.mitre.org/techniques/{parent_technique_id}/{child_technique_id}/"
+        request_url = f"https://attack.mitre.org/techniques/{main_technique_id}/{sub_technique_id}/"
         response: httpx.Response = httpx.get(request_url)
         if response.status_code != 200:
             if response.status_code == 404:
-                return ValueError(f"The technique {parent_technique_id}.{child_technique_id} does not exist in the MITRE ATT&CK framework")
+                raise ValueError(f"The technique {main_technique_id}.{sub_technique_id} does not exist in the MITRE ATT&CK framework")
             raise RuntimeError(f"Failed to fetch data from {request_url}. Status code: {response.status_code}")
         soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
 
@@ -304,8 +268,8 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
 
         # Initialize the result dictionary
         technique_data: Dict[str, Any] = {
-            "id":                   child_technique_id,
-            "parent_technique_id":  parent_technique_id,
+            "id":                   sub_technique_id,
+            "main_technique_id":    main_technique_id,
             "tactics":              [],
             "platforms":            [],
             "permission_required":  [],
@@ -425,31 +389,18 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
 
     @staticmethod
     @validate_mitre_technique_id
-    def get_parent_technique(technique_id: str) -> Dict[str, Any]:
+    def get_main_technique(technique_id: str) -> Dict[str, Any]:
         """
-        Given a parent technique ID, return the parent technique information.
+        Given a main technique ID, return the main technique information.
 
-        parameters
-        ----------
-        technique_id : str
-            The parent MITRE ATT&CK technique ID (e.g., T1548).
+        :param technique_id: The main MITRE ATT&CK technique ID (e.g., T1548).
+        :type technique_id: str
+        :return: A dictionary containing the main technique information.
+        :rtype: Dict[str, Any]
+        :raises ValueError: If the main technique ID is invalid or does not exist in the MITRE ATT&CK framework.
+        :raises RuntimeError: If there's a failure in fetching data from the MITRE ATT&CK website.
 
-        returns
-        -------
-        Dict[str, Any]
-            A dictionary containing the parent technique information.
-
-        raises
-        ------
-        ValueError
-            If the parent technique ID is invalid or does not exist in the MITRE ATT&CK framework.
-        
-        RuntimeError
-            If there's a failure in fetching data from the MITRE ATT&CK website.
-
-        Example
-        -------
-        The structure of the returned data is as follows:
+        :Example:
 
         .. code-block:: python
         
@@ -502,9 +453,8 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
                     ...
                 },
             }
-
         """
-        # parameter existence check
+        # Parameter existence check
         if not technique_id:
             raise ValueError("Technique ID is required")
 
@@ -512,7 +462,7 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         response: httpx.Response = httpx.get(request_url)
         if response.status_code != 200:
             if response.status_code == 404:
-                return ValueError(f"The technique {technique_id} does not exist in the MITRE ATT&CK framework")
+                raise ValueError(f"The technique {technique_id} does not exist in the MITRE ATT&CK framework")
             raise RuntimeError(f"Failed to fetch data from {request_url}. Status code: {response.status_code}")
         soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
 
@@ -543,6 +493,13 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
             Helper function to extract the text after the span element with the given label.
             Since there may be multiple text elements, we iterate over the siblings of the span element.
             Plus, we remove any leading/trailing whitespaces from the text.
+
+            :param card_body: The BeautifulSoup Tag object containing the card body.
+            :type card_body: Tag
+            :param label: The label text to search for.
+            :type label: str
+            :return: The text after the span element.
+            :rtype: str
             """
             span: Union[Tag, None] = card_body.find("span", string=lambda text: text and text.strip().startswith(label))
             if span and span.next_sibling:
@@ -554,6 +511,13 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
             Helper function to extract the links after the span element with the given label.
             Since there may be multiple links, we iterate over the siblings of the span element.
             Plus, we extract the name and URL of each link.
+
+            :param card_body: The BeautifulSoup Tag object containing the card body.
+            :type card_body: Tag
+            :param label: The label text to search for.
+            :type label: str
+            :return: A list of dictionaries containing link information.
+            :rtype: List[Dict[str, str]]
             """
             span: Union[Tag, None] = card_body.find("span", string=lambda text: text and text.strip().startswith(label))
             links: List[Dict[str, str]] = []
@@ -619,8 +583,8 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
             for row in detection_table.find("tbody").find_all("tr"):
                 cells = row.find_all("td")
                 if len(cells) == 4:
-                    detection_id = cells[0].get_text(strip=True)
-                    data_source = cells[1].get_text(strip=True)
+                    detection_id = cells[0].get_text(strip=True) if cells[0].get_text(strip=True) else latest_detection_id
+                    data_source = cells[1].get_text(strip=True) if cells[1].get_text(strip=True) else latest_detection_data_source
                     data_component = cells[2].get_text(strip=True)
                     latest_detection_id = detection_id  
                     latest_detection_data_source = data_source
