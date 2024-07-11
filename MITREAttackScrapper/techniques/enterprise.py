@@ -488,47 +488,6 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
             "references":           {}
         }
 
-        def get_text_after_span(card_body: Tag, label: str) -> str:
-            """
-            Helper function to extract the text after the span element with the given label.
-            Since there may be multiple text elements, we iterate over the siblings of the span element.
-            Plus, we remove any leading/trailing whitespaces from the text.
-
-            :param card_body: The BeautifulSoup Tag object containing the card body.
-            :type card_body: Tag
-            :param label: The label text to search for.
-            :type label: str
-            :return: The text after the span element.
-            :rtype: str
-            """
-            span: Union[Tag, None] = card_body.find("span", string=lambda text: text and text.strip().startswith(label))
-            if span and span.next_sibling:
-                return span.next_sibling.strip()
-            return ""
-
-        def get_links_after_span(card_body: Tag, label: str) -> List[Dict[str, str]]:
-            """
-            Helper function to extract the links after the span element with the given label.
-            Since there may be multiple links, we iterate over the siblings of the span element.
-            Plus, we extract the name and URL of each link.
-
-            :param card_body: The BeautifulSoup Tag object containing the card body.
-            :type card_body: Tag
-            :param label: The label text to search for.
-            :type label: str
-            :return: A list of dictionaries containing link information.
-            :rtype: List[Dict[str, str]]
-            """
-            span: Union[Tag, None] = card_body.find("span", string=lambda text: text and text.strip().startswith(label))
-            links: List[Dict[str, str]] = []
-            if span:
-                for a in span.find_next_siblings("a"):
-                    links.append({
-                        "name": a.get_text(strip=True),
-                        "url": "https://attack.mitre.org" + a["href"]
-                    })
-            return links
-
         # Parse sub-techniques
         technique_data["sub_techniques"] = get_links_after_span(card_body, "Sub-techniques:")
 
