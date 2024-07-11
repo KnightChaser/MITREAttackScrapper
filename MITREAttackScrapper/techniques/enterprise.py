@@ -309,12 +309,12 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         # Parse created date
         created_text: str = get_text_after_span(card_body, "Created:")
         if created_text:
-            technique_data["created"] = datetime.strptime(created_text, "%d %B %Y")
+            technique_data["created"] = datetime.strptime(created_text, "%d %B %Y").strftime("%Y-%m-%d")
 
         # Parse last modified date
         last_modified_text: str = get_text_after_span(card_body, "Last Modified:")
         if last_modified_text:
-            technique_data["last_modified"] = datetime.strptime(last_modified_text, "%d %B %Y")
+            technique_data["last_modified"] = datetime.strptime(last_modified_text, "%d %B %Y").strftime("%Y-%m-%d")
 
         # Parse procedures (assumed to be the sub-techniques table)
         # Next object(div)'s <table> tag after a h2 tag whose inner text is "Procedure Examples"
@@ -522,12 +522,12 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         # Parse created date
         created_text: str = get_text_after_span(card_body, "Created:")
         if created_text:
-            technique_data["created"] = datetime.strptime(created_text, "%d %B %Y")
+            technique_data["created"] = datetime.strptime(created_text, "%d %B %Y").strftime("%Y-%m-%d")
 
         # Parse last modified date
         last_modified_text: str = get_text_after_span(card_body, "Last Modified:")
         if last_modified_text:
-            technique_data["last_modified"] = datetime.strptime(last_modified_text, "%d %B %Y")
+            technique_data["last_modified"] = datetime.strptime(last_modified_text, "%d %B %Y").strftime("%Y-%m-%d")
 
         # Parse mitigations
         mitigation_table: Union[Tag, None] = soup.find("h2", string="Mitigations").find_next("table")

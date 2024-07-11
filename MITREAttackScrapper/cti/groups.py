@@ -3,6 +3,7 @@
 import httpx
 from bs4 import BeautifulSoup, Tag
 from typing import List, Dict, Any, Union
+from datetime import datetime
 import sys
 import os
 
@@ -189,7 +190,9 @@ class MITREAttackCTIGroups(MITREAttackInformation):
         # Extract created date
         card_body: Union[Tag, None] = soup.select_one("div.card > div.card-body")
         group_data["created"] = get_text_after_span(card_body, "Created:")
+        group_data["created"] = datetime.strptime(group_data["created"], "%d %B %Y").strftime("%Y-%m-%d")
         group_data["last_modified"] = get_text_after_span(card_body, "Last Modified:")
+        group_data["last_modified"] = datetime.strptime(group_data["last_modified"], "%d %B %Y").strftime("%Y-%m-%d")
 
         # Extract associated group descriptions
         associated_group_descriptions = []
