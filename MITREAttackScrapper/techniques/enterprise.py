@@ -201,6 +201,7 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
             {
                 "id": "T0001.001",
                 "main_technique_id": "T0001",
+                "name": "Sub-Technique Name",
                 "tactics": [
                     {
                         "name": "Tactic Name",
@@ -270,6 +271,7 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         technique_data: Dict[str, Any] = {
             "id":                   sub_technique_id,
             "main_technique_id":    main_technique_id,
+            "name":                 "",
             "tactics":              [],
             "platforms":            [],
             "permission_required":  [],
@@ -282,6 +284,9 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
             "description":          "",
             "references":           [],
         }
+
+        # Parse name
+        technique_data["name"] = soup.select_one("#v-attckmatrix > div.row > div > div > div > h1").get_text(strip=True)
 
         # Parse tactics
         technique_data["tactics"] = get_links_after_span(card_body, "Tactics:")
@@ -406,6 +411,7 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         
             {
                 "id": "T0001",
+                "name": "Technique Name",
                 "tactics": [
                     {
                         "name": "Tactic Name",
@@ -476,6 +482,7 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         technique_data: Dict[str, Any] = {
             "id":                   technique_id,
             "sub_techniques":       [],
+            "name":                 "",
             "tactics":              [],
             "platforms":            [],
             "permission_required":  [],
@@ -488,6 +495,9 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
             "references":           {}
         }
 
+        # Parse name
+        technique_data["name"] = soup.select_one("#v-attckmatrix > div.row > div > div > div > h1").get_text(strip=True)
+        
         # Parse sub-techniques
         technique_data["sub_techniques"] = get_links_after_span(card_body, "Sub-techniques:")
 
