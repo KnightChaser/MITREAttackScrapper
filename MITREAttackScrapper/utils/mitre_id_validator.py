@@ -188,3 +188,41 @@ def validate_mitre_software_id(function: Callable) -> Callable:
         return function(*args, **kwargs)
     
     return wrapper
+
+def validate_mitre_campaign_id(function: Callable) -> Callable:
+    """
+    A wrapper function to validate the MITRE ATT&CK campaign ID.
+
+    The format of the MITRE ATT&CK campaign ID is as follows:
+
+    .. code-block:: text
+
+        CXXXX
+        ||
+        |+-> Campaign ID (4 digits)
+        |
+        +-> Prefix "C" meaning "Campaign"
+
+    :param function: The function to be wrapped.
+    :type function: Callable
+    :return: The wrapped function that requires the MITRE ATT&CK campaign ID with valid format.
+    :rtype: Callable
+    :raises ValueError: If the MITRE ATT&CK campaign ID is not in the valid format.
+    """
+
+    @wraps(function)
+    def wrapper(*args, **kwargs):
+        pattern = r"^C\d{4}$"
+        # Iterate through all arguments and keyword arguments
+        for arg in args:
+            if isinstance(arg, str) and not re.match(pattern, arg):
+                raise ValueError("Invalid MITRE ATT&CK campaign ID, should be in the format of CXXXX")
+        
+        for key, value in kwargs.items():
+            if isinstance(key, str) and key.endswith("campaign_id"):
+                if not re.match(pattern, value):
+                    raise ValueError("Invalid MITRE ATT&CK campaign ID, should be in the format of CXXXX")
+        
+        return function(*args, **kwargs)
+    
+    return wrapper
