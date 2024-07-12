@@ -5,12 +5,9 @@ from bs4 import BeautifulSoup, Tag
 from typing import List, Dict, Any, Union
 from datetime import datetime
 
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-from superclass import MITREAttackInformation
-from utils.scrapping_helper import get_text_after_span
-from utils.mitre_id_validator import validate_mitre_mitigation_id
+from ..superclass import MITREAttackInformation
+from ..utils.scrapping_helper import get_text_after_span
+from ..utils.mitre_id_validator import validate_mitre_mitigation_id
 
 class MITREAttackEnterpriseMitigations(MITREAttackInformation):
     """A class containing methods to parse MITRE ATT&CK Enterprise Mitigations."""
