@@ -74,9 +74,9 @@ class MITREAttackEnterpriseMitigations(MITREAttackInformation):
         :type mitigation_id: str
         :return: A dictionary containing the details of the specified MITRE ATT&CK mitigation.
         :rtype: Dict[str, Any]
-        :raises ValueError: If the mitigation ID does not exist in the MITRE ATT&CK Enterprise mitigations.
-        :raises RuntimeError: If there's a failure in fetching data from the MITRE ATT&CK website.
-
+        :raises ValueError: If the mitigation ID format is invalid.
+        :raises RuntimeError: If the data fetched from the MITRE ATT&CK website is not in the expected format.
+        
         :Example:
 
         .. code-block:: python
@@ -113,8 +113,6 @@ class MITREAttackEnterpriseMitigations(MITREAttackInformation):
         target_url = f"https://attack.mitre.org/mitigations/{mitigation_id}/"
         response = httpx.get(target_url)
         if response.status_code != 200:
-            if response.status_code == 404:
-                raise ValueError(f"The mitigation {mitigation_id} does not exist in the MITRE ATT&CK Enterprise mitigations")
             raise RuntimeError(f"Failed to fetch data from {target_url}")
 
         soup = BeautifulSoup(response.text, "html.parser")

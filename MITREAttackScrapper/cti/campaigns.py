@@ -79,7 +79,7 @@ class MITREAttackCampaign(MITREAttackInformation):
         :type campagin_id: str
         :return: The details of the MITRE ATT&CK campaign.
         :rtype: Dict[str, Any]
-        :raises ValueError: If the provided campaign ID is invalid.
+        :raises ValueError: If the provided campaign ID format is invalid. 
         :raises RuntimeError: If the data fetch from the MITRE ATT&CK website fails.
 
         Example
@@ -144,7 +144,7 @@ class MITREAttackCampaign(MITREAttackInformation):
         target_url = f"https://attack.mitre.org/campaigns/{campagin_id}/"
         response = httpx.get(target_url)
         if response.status_code != 200:
-            raise RuntimeError("Failed to fetch data from MITRE ATT&CK website.")
+            raise RuntimeError(f"Failed to fetch data from {target_url}")
         
         soup = BeautifulSoup(response.text, "html.parser")
         campagin_data = {

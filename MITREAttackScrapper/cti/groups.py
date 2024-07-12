@@ -83,6 +83,7 @@ class MITREAttackCTIGroups(MITREAttackInformation):
         :type group_id: str
         :return: A dictionary containing information about the specific MITRE ATT&CK Group.
         :rtype: Dict[str, Any]
+        :raises ValueError: If the provided group ID format is invalid.
         :raises RuntimeError: If the data fetch from the MITRE ATT&CK website fails.
 
         Example

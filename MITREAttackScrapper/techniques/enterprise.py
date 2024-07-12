@@ -106,9 +106,9 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         :type technique_id: str
         :return: A dictionary containing technique information.
         :rtype: Dict[str, Any]
-        :raises ValueError: If the technique ID is invalid or does not exist in the MITRE ATT&CK framework.
-        :raises RuntimeError: If there's a failure in fetching data from the MITRE ATT&CK website.
-
+        :raises ValueError: If the technique ID format is invalid.
+        :raises RuntimeError: If the data fetch from the MITRE ATT&CK website fails.
+        
         :Example:
 
         .. code-block:: python
@@ -163,13 +163,6 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
                 }
             }
         """
-        if not technique_id:
-            raise ValueError("Technique ID is required")
-        
-        # Regex check for the technique ID
-        if not re.match(r"T\d{4}(\.\d{3})?", technique_id):
-            raise ValueError("Invalid technique ID format. Please provide a valid technique ID.")
-        
         if "." in technique_id:
             # Sub technique
             main_technique_id, sub_technique_id = technique_id.split(".")
@@ -190,9 +183,9 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         :type sub_technique_id: str
         :return: A dictionary containing the sub technique information.
         :rtype: Dict[str, Any]
-        :raises ValueError: If the main and sub technique IDs are invalid or do not exist in the MITRE ATT&CK framework.
+        :raises ValueError: If the provided main and sub technique IDs are invalid or do not exist in the MITRE ATT&CK framework.
         :raises RuntimeError: If there's a failure in fetching data from the MITRE ATT&CK website.
-
+        
         :Example:
 
         .. code-block:: python
@@ -255,9 +248,7 @@ class MITREAttackEnterpriseTechniques(MITREAttackInformation):
         request_url = f"https://attack.mitre.org/techniques/{main_technique_id}/{sub_technique_id}/"
         response: httpx.Response = httpx.get(request_url)
         if response.status_code != 200:
-            if response.status_code == 404:
-                raise ValueError(f"The technique {main_technique_id}.{sub_technique_id} does not exist in the MITRE ATT&CK framework")
-            raise RuntimeError(f"Failed to fetch data from {request_url}. Status code: {response.status_code}")
+            raise RuntimeError(f"Failed to fetch data from {request_url}")
         soup: BeautifulSoup = BeautifulSoup(response.text, "html.parser")
 
         # Get the data card body

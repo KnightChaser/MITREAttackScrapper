@@ -82,8 +82,9 @@ class MITREAttackCTISoftware(MITREAttackInformation):
         :type software_id: str
         :return: A dictionary containing information about the specific MITRE ATT&CK Software.
         :rtype: Dict[str, Any]
-        :raises ValueError: If the provided software_id is invalid.
-
+        :raises ValueError: If the provided software ID format is invalid.
+        :raises RuntimeError: If the data fetch from the MITRE ATT&CK website fails.
+        
         Example
         -------
         The return value will be in the following format:
@@ -136,7 +137,7 @@ class MITREAttackCTISoftware(MITREAttackInformation):
         target_url = f"https://attack.mitre.org/software/{software_id}/"
         response = httpx.get(target_url)
         if response.status_code != 200:
-            raise ValueError(f"Invalid software_id: {software_id}")
+            raise RuntimeError(f"Failed to fetch data from {target_url}")
 
         soup = BeautifulSoup(response.text, "html.parser")
         software_data = {
