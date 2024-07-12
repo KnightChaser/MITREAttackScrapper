@@ -207,7 +207,6 @@ class MITREAttackCTIGroups(MITREAttackInformation):
         group_data["associated_group_descriptions"] = associated_group_descriptions
 
         # Extract techniques used (if any, as an example)
-        # This section depends on the structure of the page, adjust selectors as needed
         techniques_used = []
         techniques_table: Union[Tag, None] = soup.find("h2", string="Techniques Used").find_next("table") if soup.find("h2", string="Techniques Used") else None
         if techniques_table:
