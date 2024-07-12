@@ -40,7 +40,7 @@ sphinx-apidoc -f -o docs/source .\MITREAttackScrapper\
 - **CTI**
   - [x] MITRE ATT&CK CTI Groups
   - [x] MITRE ATT&CK CTI Software
-  - [ ] MITRE ATT&CK CTI Campaigns
+  - [x] MITRE ATT&CK CTI Campaigns
 - **Defenses/Mitigations**
   - [x] MITRE ATT&CK Enterprise Mitigations(Defenses)
   - [ ] MITRE ATT&CK Mobile Mitigations(Defenses)

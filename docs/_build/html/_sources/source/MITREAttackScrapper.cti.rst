@@ -4,6 +4,14 @@ MITREAttackScrapper.cti package
 Submodules
 ----------
 
+MITREAttackScrapper.cti.campaigns module
+----------------------------------------
+
+.. automodule:: MITREAttackScrapper.cti.campaigns
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 MITREAttackScrapper.cti.groups module
 -------------------------------------
 
