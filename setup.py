@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="MITREAttackScrapper",
-    version="0.1.0",
+    version="0.1.1",
     author="KnightChaser",
     author_email="agerio100@naver.com",
     description="A package for conveniently retrieving MITRE ATT&CK data",
