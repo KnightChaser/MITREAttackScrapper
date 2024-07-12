@@ -12,6 +12,10 @@ setuptools.setup(
     description="A package for conveniently retrieving MITRE ATT&CK data",
     long_description=long_description,
     long_description_content_type="text/markdown",
+    install_requires=[
+        'beautifulsoup4',
+        'httpx'
+    ],
     url="https://github.com/KnightChaser/MITREAttackScrapper",
     packages=setuptools.find_packages(),
     classifiers=[
