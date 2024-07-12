@@ -103,7 +103,7 @@ class MITREAttackCTIGroups(MITREAttackInformation):
                 "url": "https://attack.mitre.org/groups/G0001/",
                 "associated_group_descriptions": [
                     {
-                        "group": "Associated Group",
+                        "name": "Associated Group",
                         "description": "Associated Group Description"
                     },
                     # ... more associated groups
@@ -204,7 +204,8 @@ class MITREAttackCTIGroups(MITREAttackInformation):
                 if len(cells) == 2:
                     group_name = cells[0].text.strip()
                     description = cells[1].text.strip()
-                    associated_group_descriptions.append({"group": group_name, "description": description})
+                    associated_group_descriptions.append({"name": group_name, 
+                                                          "description": description})
         group_data["associated_group_descriptions"] = associated_group_descriptions
 
         # Extract techniques used (if any, as an example)
