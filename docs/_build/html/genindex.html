@@ -155,6 +155,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="source/modules.html">MITREAttackScrapper</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="source/MITREAttackScrapper.html">MITREAttackScrapper package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="source/MITREAttackScrapper.cti.html">MITREAttackScrapper.cti package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="source/MITREAttackScrapper.matrices.html">MITREAttackScrapper.matrices package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="source/MITREAttackScrapper.mitigations.html">MITREAttackScrapper.mitigations package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="source/MITREAttackScrapper.tactics.html">MITREAttackScrapper.tactics package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="source/MITREAttackScrapper.techniques.html">MITREAttackScrapper.techniques package</a></li>
@@ -284,6 +285,8 @@ document.write(`
 </li>
         <li><a href="source/MITREAttackScrapper.cti.html#MITREAttackScrapper.cti.software.MITREAttackCTISoftware.get">(MITREAttackScrapper.cti.software.MITREAttackCTISoftware static method)</a>
 </li>
+        <li><a href="source/MITREAttackScrapper.matrices.html#MITREAttackScrapper.matrices.enterprise.MITREAttackEnterpriseMatrix.get">(MITREAttackScrapper.matrices.enterprise.MITREAttackEnterpriseMatrix static method)</a>
+</li>
         <li><a href="source/MITREAttackScrapper.mitigations.html#MITREAttackScrapper.mitigations.enterprise.MITREAttackEnterpriseMitigations.get">(MITREAttackScrapper.mitigations.enterprise.MITREAttackEnterpriseMitigations static method)</a>
 </li>
         <li><a href="source/MITREAttackScrapper.html#MITREAttackScrapper.superclass.MITREAttackInformation.get">(MITREAttackScrapper.superclass.MITREAttackInformation method)</a>, <a href="source/MITREAttackScrapper.html#id0">[1]</a>
@@ -302,6 +305,8 @@ document.write(`
 </li>
         <li><a href="source/MITREAttackScrapper.cti.html#MITREAttackScrapper.cti.software.MITREAttackCTISoftware.get_list">(MITREAttackScrapper.cti.software.MITREAttackCTISoftware static method)</a>
 </li>
+        <li><a href="source/MITREAttackScrapper.matrices.html#MITREAttackScrapper.matrices.enterprise.MITREAttackEnterpriseMatrix.get_list">(MITREAttackScrapper.matrices.enterprise.MITREAttackEnterpriseMatrix static method)</a>
+</li>
         <li><a href="source/MITREAttackScrapper.mitigations.html#MITREAttackScrapper.mitigations.enterprise.MITREAttackEnterpriseMitigations.get_list">(MITREAttackScrapper.mitigations.enterprise.MITREAttackEnterpriseMitigations static method)</a>
 </li>
         <li><a href="source/MITREAttackScrapper.html#MITREAttackScrapper.superclass.MITREAttackInformation.get_list">(MITREAttackScrapper.superclass.MITREAttackInformation method)</a>, <a href="source/MITREAttackScrapper.html#id1">[1]</a>
@@ -314,6 +319,8 @@ document.write(`
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="source/MITREAttackScrapper.techniques.html#MITREAttackScrapper.techniques.enterprise.MITREAttackEnterpriseTechniques.get_main_technique">get_main_technique() (MITREAttackScrapper.techniques.enterprise.MITREAttackEnterpriseTechniques static method)</a>
+</li>
+      <li><a href="source/MITREAttackScrapper.matrices.html#MITREAttackScrapper.matrices.enterprise.MITREAttackEnterpriseMatrix.get_matrix_dataframe">get_matrix_dataframe() (MITREAttackScrapper.matrices.enterprise.MITREAttackEnterpriseMatrix static method)</a>
 </li>
       <li><a href="source/MITREAttackScrapper.techniques.html#MITREAttackScrapper.techniques.enterprise.MITREAttackEnterpriseTechniques.get_sub_technique">get_sub_technique() (MITREAttackScrapper.techniques.enterprise.MITREAttackEnterpriseTechniques static method)</a>
 </li>
@@ -330,6 +337,8 @@ document.write(`
       <li><a href="source/MITREAttackScrapper.cti.html#MITREAttackScrapper.cti.groups.MITREAttackCTIGroups">MITREAttackCTIGroups (class in MITREAttackScrapper.cti.groups)</a>
 </li>
       <li><a href="source/MITREAttackScrapper.cti.html#MITREAttackScrapper.cti.software.MITREAttackCTISoftware">MITREAttackCTISoftware (class in MITREAttackScrapper.cti.software)</a>
+</li>
+      <li><a href="source/MITREAttackScrapper.matrices.html#MITREAttackScrapper.matrices.enterprise.MITREAttackEnterpriseMatrix">MITREAttackEnterpriseMatrix (class in MITREAttackScrapper.matrices.enterprise)</a>
 </li>
       <li><a href="source/MITREAttackScrapper.mitigations.html#MITREAttackScrapper.mitigations.enterprise.MITREAttackEnterpriseMitigations">MITREAttackEnterpriseMitigations (class in MITREAttackScrapper.mitigations.enterprise)</a>
 </li>
@@ -375,6 +384,20 @@ document.write(`
 </li>
       </ul></li>
       <li>
+    MITREAttackScrapper.matrices
+
+      <ul>
+        <li><a href="source/MITREAttackScrapper.matrices.html#module-MITREAttackScrapper.matrices">module</a>
+</li>
+      </ul></li>
+      <li>
+    MITREAttackScrapper.matrices.enterprise
+
+      <ul>
+        <li><a href="source/MITREAttackScrapper.matrices.html#module-MITREAttackScrapper.matrices.enterprise">module</a>
+</li>
+      </ul></li>
+      <li>
     MITREAttackScrapper.mitigations
 
       <ul>
@@ -402,6 +425,8 @@ document.write(`
         <li><a href="source/MITREAttackScrapper.tactics.html#module-MITREAttackScrapper.tactics">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     MITREAttackScrapper.tactics.enterprise
 
@@ -409,8 +434,6 @@ document.write(`
         <li><a href="source/MITREAttackScrapper.tactics.html#module-MITREAttackScrapper.tactics.enterprise">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     MITREAttackScrapper.techniques
 
@@ -459,6 +482,10 @@ document.write(`
         <li><a href="source/MITREAttackScrapper.cti.html#module-MITREAttackScrapper.cti.groups">MITREAttackScrapper.cti.groups</a>
 </li>
         <li><a href="source/MITREAttackScrapper.cti.html#module-MITREAttackScrapper.cti.software">MITREAttackScrapper.cti.software</a>
+</li>
+        <li><a href="source/MITREAttackScrapper.matrices.html#module-MITREAttackScrapper.matrices">MITREAttackScrapper.matrices</a>
+</li>
+        <li><a href="source/MITREAttackScrapper.matrices.html#module-MITREAttackScrapper.matrices.enterprise">MITREAttackScrapper.matrices.enterprise</a>
 </li>
         <li><a href="source/MITREAttackScrapper.mitigations.html#module-MITREAttackScrapper.mitigations">MITREAttackScrapper.mitigations</a>
 </li>

@@ -8,6 +8,7 @@ Subpackages
    :maxdepth: 4
 
    MITREAttackScrapper.cti
+   MITREAttackScrapper.matrices
    MITREAttackScrapper.mitigations
    MITREAttackScrapper.tactics
    MITREAttackScrapper.techniques

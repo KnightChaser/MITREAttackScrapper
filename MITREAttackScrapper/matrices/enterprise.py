@@ -147,6 +147,7 @@ class MITREAttackEnterpriseMatrix(MITREAttackInformation):
 
         Example
         -------
+        The generated DataFrame will look like the following:
 
         .. code-block:: text
 
@@ -154,6 +155,9 @@ class MITREAttackEnterpriseMatrix(MITREAttackInformation):
             T1234 Technique   T1235 Technique            ...
             T1236 Technique   T1237 Technique            ...
             ...               ...                        ...
+
+        Note that the Pandas DataFrame will be rectangular, with the maximum number of techniques under any tactic.
+        Thus, the Pandas DataFrame will be padded with `None` values where necessary.
 
         :return: A pandas DataFrame containing MITRE ATT&CK Enterprise Matrix data.
         :rtype: pd.DataFrame
