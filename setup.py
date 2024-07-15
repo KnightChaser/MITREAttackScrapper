@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="MITREAttackScrapper",
-    version="0.1.4",
+    version="0.1.5",
     author="KnightChaser",
     author_email="agerio100@naver.com",
     description="A package for conveniently retrieving MITRE ATT&CK data",
@@ -14,7 +14,8 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     install_requires=[
         'beautifulsoup4',
-        'httpx'
+        'httpx',
+        'pandas',
     ],
     url="https://github.com/KnightChaser/MITREAttackScrapper",
     packages=setuptools.find_packages(include=['MITREAttackScrapper', 

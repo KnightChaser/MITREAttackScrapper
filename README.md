@@ -46,6 +46,6 @@ sphinx-apidoc -f -o docs/source .\MITREAttackScrapper\
   - [ ] MITRE ATT&CK Mobile Mitigations(Defenses)
   - [ ] MITRE ATT&CK ICS Mitigations(Defenses)
 - **ATT&CK MATRICES**
-  - [ ] MITRE ATT&CK Enterprise Matrices
+  - [x] MITRE ATT&CK Enterprise Matrices
   - [ ] MITRE ATT&CK Mobile Matrices
   - [ ] MITRE ATT&CK ICS Matrices
