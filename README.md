@@ -20,6 +20,11 @@ if __name__ == '__main__':
 ### Note: Currently under development, not stable!!!
 
 ## How to use?
+- Download the package via PyPI. You can visit the PyPI webpage of this package at: **https://pypi.org/project/MITREAttackScrapper**
+```sh
+pip install MITREAttackScraper
+```
+
 Refer to the **[documentation](https://knightchaser.github.io/MITREAttackScrapper/)**! >_<
 - The documentation is based on **`sphinx-apidoc`**, which is an automated documentation tool for lazy Python and other language-based programmers.
 - Locally build the Sphinx document if there are some changes on the codebase. The GitHub page action will read the refreshed page built results and the GitHub page will be updated accordingly.
